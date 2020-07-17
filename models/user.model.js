@@ -34,7 +34,7 @@ var userSchema = new mongoose.Schema({
     gender: {
         type: String,
     },
-    nationality: {
+    country: {
         type: String,
     },
     languagePref: {
