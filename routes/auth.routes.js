@@ -28,10 +28,16 @@ router.get('/login', (req, res) => {
 router.post('/login', passport.authenticate("local", {
     successRedirect: "/", //after login success
     failureRedirect: "/auth/login", //if fail
-    failureFlash: "Invalid Username or Password",
-    successFlash: "You have logged In!"
+    failureFlash: "Invalid Email or Password",
+    successFlash: "Logged in successfully."
 })
 );
+
+router.get("/logout", (req, res) => {
+    req.logout();
+    req.flash("success","Logged out successfully");
+    res.redirect("/");
+});
 
 
 module.exports = router;
