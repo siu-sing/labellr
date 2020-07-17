@@ -1,0 +1,20 @@
+### Views
+- Home landing page
+    - "/"
+    - views/index.ejs
+    - Show a signin box
+- Admin Dashboard
+    - "/a/"
+    - 
+    - Upload text
+    - View list of users and their status
+- Labeller Views
+    - Dashboard
+        - "/l/"
+        - Show available jobs
+        - Show record/history
+        - Allow update of personal details
+    - Labelling
+- Auth
+    - Sign in page
+    - Sign up page
