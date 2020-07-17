@@ -1,3 +1,27 @@
 
-
-<%- include("auth/login") %>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 align-self-center">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <img src="/img/logo_transparent.png" style="max-width: 100%;" width="150px" alt="logo_transparent">
+                </div>
+                <div class="col-md-8 my-3">
+                    <div class="leading-text text-center text-md-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsum, nobis laudantium, neque consectetur fugiat, nihil iusto officia quas ipsam quasi omnis qui beatae? Accusantium soluta itaque laboriosam non reprehenderit.</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md"><%- include("auth/login") %></div>
+            </div>
+            <div class="row"> <div class="col my-1"> <hr /></div>  </div>
+            <div class="row">
+                <div class="col-md text-center">
+                    Don't have an account? <br> Register as a Labeller or Client here. <br>
+                    <a class="btn btn-outline-dark my-3" style="background-color:#99B0B4;" href="auth/register">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
