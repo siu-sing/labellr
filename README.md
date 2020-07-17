@@ -10,7 +10,9 @@ Even though there is pre-labelled data readily available online, these labels ma
 
 This app aims to provide a platform for crowdsourcing labellers to not only help label training data, but allow for users/data scientists to select different demographics to help label the data in specific contexts.
 
-In the basic case, text content can come from restaurant reviews or forums.
+In the basic case, text content can come from restaurant reviews or forums. 
+
+Clients here refer to data scientists who needs some training data labelled.
 
 ### References: 
 - [Amazon SageMaker Ground Truth](https://aws.amazon.com/sagemaker/groundtruth/)
@@ -49,3 +51,4 @@ In the basic case, text content can come from restaurant reviews or forums.
 - Download of results by csv
 - Convert to chat bot for labelling on the go
 - Analytics for labels, stats for the labels etc
+ 
