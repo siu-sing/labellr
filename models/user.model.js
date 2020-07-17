@@ -20,6 +20,14 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    // 0 is admin, 1 is labeller, 2 is client
+    userType: {
+        type: Number,
+        min: 0,
+        max: 2,
+    },
+
+    //Labeller specific
     dateOfBirth: {
         type: String,
     },
@@ -36,12 +44,9 @@ var userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Jobs",
     }],
-    // 0 is admin, 1 is labeller, 2 is client
-    userType: {
-        type: Number,
-        min: 0,
-        max: 2,
-    },
+
+    //Client specific - industry
+    
 });
 
 userSchema.pre("save", function (next) {

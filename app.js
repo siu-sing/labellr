@@ -5,11 +5,9 @@ const app = express();
 const passport = require("./config/passportConfig");
 const session = require('express-session');
 const flash = require('connect-flash');
-
-
 require("dotenv").config();
 
-
+//Connect to MongoDB
 mongoose.connect(
     process.env.MONGODB, {
         useNewUrlParser: true,
@@ -22,7 +20,10 @@ mongoose.connect(
     }
 );
 
-app.use(express.static("public")); //look for static files in public
+//Look for static files in public
+app.use(express.static("public")); 
+
+//Middleware
 app.use(express.urlencoded({
     extended: true
 }));
@@ -51,10 +52,13 @@ app.use(function(request, response, next) {
   next();
 });
 
+//MAIN INDEX
 app.get('/', (req, res) => {
     res.render('index');
 });
 
+//ALL ROUTES
+app.use('/auth', require('./routes/auth.routes'))
 
 app.listen(process.env.PORT, () =>
   console.log(`connected to express on ${process.env.PORT}`)

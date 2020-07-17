@@ -7,12 +7,17 @@
   <title>Labellr</title>
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light" style="background-color:#87D68D;">
         <a class="navbar-brand" href="#">
           <img src="/img/labellrlogo.svg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
           Labellr
         </a>
+        <% if(currentUser){%>
+            <span class="my-2 my-lg-0">Logged in as <%= currentUser.firstname %> <%= currentUser.lastname %></span>
+            <% } %>
       </nav>
  <%- body %>
 </body>
 </html>
+
+<!-- https://coolors.co/f7fff6-bcebcb-87d68d-93b48b-8491a3 -->
