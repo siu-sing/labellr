@@ -59,6 +59,7 @@ app.get('/', (req, res) => {
 
 //ALL ROUTES
 app.use('/auth', require('./routes/auth.routes'))
+app.use('/client', require('./routes/client.routes'))
 
 app.listen(process.env.PORT, () =>
   console.log(`connected to express on ${process.env.PORT}`)

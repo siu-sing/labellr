@@ -40,13 +40,21 @@ var userSchema = new mongoose.Schema({
     languagePref: {
         type: String,
     },
+    //List of jobs with status
     labelJobs: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Jobs",
-    }],
+            job: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Job"
+            },
+            jobStatus: {
+                type: String,
+                enum:["inProgress","complete"],
+            },
+        }
+    ],
 
     //Client specific - industry
-    
+
 });
 
 userSchema.pre("save", function (next) {

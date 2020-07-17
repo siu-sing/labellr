@@ -1,0 +1,62 @@
+Create New Jobs
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<h3>Create New Workflow</h3>
+			<p>In this page, you will create your customized workflow for labellers and providing details on the kind of
+				labelling required.</p>
+			<form action="/client/create" method="post">
+				<div class="form-group">
+					<label for="jobName">Workflow Title</label>
+					<input name="jobName" type="text" class="form-control" id="jobName">
+				</div>
+
+
+
+				<div class="form-group">What type of data would you need help in labelling?</div>
+				<div class="form-group form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="dataType" id="inlineRadio1" value="text" checked>
+					<label class="form-check-label" for="inlineRadio1">Text</label>
+				</div>
+				<div class="form-group form-check form-check-inline">
+					<input class="form-check-input" type="radio" name="dataType" id="inlineRadio2" value="image">
+					<label class="form-check-label" for="inlineRadio2">Images</label>
+				</div>
+
+				<div class="form-inline form-group">
+					<label class="mr-4" for="dueDate">When do you need the labelling done?</label>
+					<input name="dueDate" type="date" class="form-control" id="dueDate" value="2020-07-27">
+				</div>
+
+				<div class="form-inline form-group">
+					<label class="mr-4" for="numLabels">How many labels per data point?</label>
+					<input name="numLabels" type="number" class="form-control" id="numLabels" value="3">
+
+					<small id="numLabels" class="form-text text-muted">We recommend a minimum of 3, maximum of 5.</small>
+				</div>
+
+                <div class="form-group">What type of labels would you need?</div>
+                <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="language">
+                      <label class="form-check-label" for="language" value="language"> Language </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="sentiment">
+                        <label class="form-check-label" for="sentiment" value="sentiment"> Sentiment </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="topic">
+                        <label class="form-check-label" for="topic" value="topic"> Topic </label>
+                      </div>
+                  </div>
+
+
+
+				<button type="submit" class="btn btn-outline-dark my-3" style="background-color:#99B0B4;">Create New
+					WorkFlow</button>
+			</form>
+		</div>
+	</div>
+</div>
