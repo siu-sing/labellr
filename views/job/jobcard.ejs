@@ -1,0 +1,20 @@
+<div class="card my-2">
+	<div class="card-header text-capitalize font-weight-bold">
+		<%= job.dataType %> labelling workflow - <% job.labelType.forEach((type,idx)=>{ %>
+		<% if(idx>0) { %>
+		<%= ", " %>
+		<% } %>
+		<%= type %>
+		<% })%>
+	</div>
+	<div class="card-body">
+		<h6 class="card-title"><%= job.jobName %></h6>
+        <div><strong>Created:</strong> <%= job.createdAt.toDateString() %> </div>
+        <div><strong>Labels per data point:</strong> <%= job.numLabels %> </div>
+        <div><strong>Due Date:</strong> <%= job.dueDate %> </div>
+        <div><strong>Status:</strong> <%= "" %> </div>
+        <div><strong>No. of labellers:</strong> <%= "" %> </div>
+        <div><strong>Owner:</strong> <%= job.owner.firstname %> <%= job.owner.lastname %></div>
+		<a href="#" class="btn btn-primary mt-2 float-right">Edit</a>
+	</div>
+</div>

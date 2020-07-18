@@ -8,7 +8,7 @@ router.get('/register', (req, res) => {
 })
 
 //Post and register user
-router.post('/register',  async (req, res) => {
+router.post('/register', async (req, res) => {
     console.log(req.body);
     let user = User(req.body);
     try {
@@ -26,16 +26,29 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', passport.authenticate("local", {
-    successRedirect: "/", //after login success
+    successRedirect: "/auth/loginredirect", //after login success
     failureRedirect: "/auth/login", //if fail
     failureFlash: "Invalid Email or Password",
     successFlash: "Logged in successfully."
-})
-);
+}));
+
+router.get('/loginredirect', (req, res) => {
+    switch (req.user.userType) {
+        case 0:
+            res.redirect("/");
+            break;
+        case 1:
+            res.redirect("/");
+            break;
+        case 2:
+            res.redirect("/client/dashboard")
+            break;
+    }
+});
 
 router.get("/logout", (req, res) => {
     req.logout();
-    req.flash("success","Logged out successfully");
+    req.flash("success", "Logged out successfully");
     res.redirect("/");
 });
 

@@ -18,6 +18,7 @@ var jobSchema = new mongoose.Schema({
     //Number of labels per data point requested by client
     numLabels: Number,
     dataType: String,
+    labelType: [String],
     texts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Text",
