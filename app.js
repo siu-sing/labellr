@@ -6,6 +6,7 @@ const passport = require("./config/passportConfig");
 const session = require('express-session');
 const flash = require('connect-flash');
 const methodOverride = require("method-override");
+const checkUser = require('./config/checkUser');
 require("dotenv").config();
 
 //Connect to MongoDB
@@ -61,8 +62,9 @@ app.get('/', (req, res) => {
 });
 
 //ALL ROUTES
-app.use('/auth', require('./routes/auth.routes'))
-app.use('/client', require('./routes/client.routes'))
+app.use('/auth', require('./routes/auth.routes'));
+app.use('/client', checkUser.isClient, require('./routes/client.routes'));
+app.use('/admin', checkUser.isAdmin, require('./routes/admin.routes'))
 
 app.listen(process.env.PORT, () =>
   console.log(`connected to express on ${process.env.PORT}`)

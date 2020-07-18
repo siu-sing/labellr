@@ -1,7 +1,5 @@
 const router = require("express").Router();
-const User = require('../models/user.model');
 const Job = require('../models/job.model');
-const passport = require("../config/passportConfig");
 
 //Create Route
 router.get('/create', (req, res) => {

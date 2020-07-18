@@ -75,5 +75,21 @@ userSchema.methods.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
 };
 
+userSchema.virtual('userTypeName').get(function() {
+    let statusname="";
+    switch (this.userType) {
+        case 0:
+            statusname = "Admin"
+            break;
+        case 1:
+            statusname = "Labeller"
+            break;
+        case 2:
+            statusname = "Client"
+            break;
+    }
+    return statusname;
+});
+
 const User = mongoose.model("User", userSchema);
 module.exports = User;

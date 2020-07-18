@@ -7,11 +7,9 @@
     <div class="row">
         <% jobs.forEach(job => { %>
         <div class="col-md-6">
-            
                 <div>
                     <%- include("../job/jobcard", {job:job}) %>
                 </div>
-            
         </div>
         <% }) %>
     </div>

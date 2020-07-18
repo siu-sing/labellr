@@ -1,0 +1,62 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<!-- users go here -->
+			<div class="row">
+				<div class="col mt-3">
+					<h3>All Users</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div> Total Users: <strong><%= userSumm.total %></strong> 
+						<% userSumm.summ.forEach( type => { %>
+						| <%= type._id %>: <strong><%= type.count %></strong>
+						<% }) %>
+					</div>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Email</th>
+                              <th scope="col">Type</th>
+                              <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                                <% users.forEach((user,idx)=>{ %>
+                                    <tr>
+                                        <th scope="row"><%= idx+1 %></th>
+                                        <td><%= user.email %></td>
+                                        <td><%= user.userTypeName %></td>
+                                        <td> 
+                                            <a href="#">view</a>
+                                            <a href="#">edit</a>
+                                            <a href="#">delete</a>
+                                        </td>
+                                      </tr>
+                                <% }) %> 
+                            </tbody>
+                    </table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<!-- jobs go here -->
+			<div class="row">
+				<div class="col mt-3">
+					<h3>All Workflows</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<% jobs.forEach(job => { %>
+					<div>
+						<%- include("../job/jobcard", {job:job}) %>
+					</div>
+					<% }) %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

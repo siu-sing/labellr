@@ -35,7 +35,7 @@ router.post('/login', passport.authenticate("local", {
 router.get('/loginredirect', (req, res) => {
     switch (req.user.userType) {
         case 0:
-            res.redirect("/");
+            res.redirect("/admin/dashboard");
             break;
         case 1:
             res.redirect("/");
