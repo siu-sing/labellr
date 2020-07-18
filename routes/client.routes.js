@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Job = require('../models/job.model');
+const Text = require('../models/text.model');
 
 //Create Route
 router.get('/create', (req, res) => {
@@ -77,5 +78,15 @@ router.delete("/delete/:id", async (req, res) => {
     }
 });
 
+
+//-----TEXT CRUD
+//Upload Page
+router.get('/upload/text_manual', (req, res) => {
+    res.render('client/upload_text_manual');
+});
+
+router.post('/upload/text_manual', (req, res) => {
+    console.log(req.body);
+});
 
 module.exports = router;

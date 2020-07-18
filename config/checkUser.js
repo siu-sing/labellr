@@ -1,3 +1,9 @@
+
+/*
+    Admin has full access
+    Client and Labeller can only access their own routes
+*/
+
 let isAdmin = function (request, response, next) {
     if (request.user.userType != 0) {
         request.flash("error", "Admin Access Only")

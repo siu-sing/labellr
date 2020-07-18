@@ -18,3 +18,6 @@
 - Auth
     - Sign in page
     - Sign up page
+
+
+https://code.tutsplus.com/articles/bulk-import-a-csv-file-into-mongodb-using-mongoose-with-nodejs--cms-29574
