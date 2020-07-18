@@ -12,7 +12,7 @@ router.post('/create', async (req, res) => {
 
     let jobDetails = req.body;
     jobDetails["owner"] = req.user._id;
-    
+
     try {
         let job = Job(jobDetails);
         let saveRes = await job.save();
@@ -42,13 +42,30 @@ router.get("/dashboard", async (req, res) => {
 });
 
 //Edit
-router.get("/edit/:id", async (req,res) => {
+router.get("/edit/:id", async (req, res) => {
     //Find Job by id and display
-    // res.render("client/edit",{job:findRes} )
+    // console.log(req.params.id);
+    try {
+        let findRes = await Job.findById(req.params.id);
+        console.log(findRes);
+        res.render("client/edit", {
+            job: findRes
+        })
+    } catch (error) {
+        console.log(error);
+    }
+
 });
 
-router.post("/edit/:id", async (req,res) => {
+router.post("/edit/:id", async (req, res) => {
     //Find Job by id and update
+    try {
+        let jobDetails = req.body;
+        jobDetails["owner"] = req.user._id;
+        let findRes = await Job.findByIdAndUpdate(req.params.id,jobDetails)
+    } catch (error) {
+        console.log(error);
+    }
     res.redirect("/client/dashboard")
 });
 
