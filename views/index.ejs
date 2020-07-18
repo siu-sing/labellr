@@ -11,7 +11,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+            <div class="col-md-6 <% if(currentUser){%>
+                <%= "d-none"  %>
+                <% } %> 
+                ">    
             <div class="row">
                 <div class="col-md"><%- include("auth/login") %></div>
             </div>

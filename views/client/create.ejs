@@ -2,16 +2,13 @@
 	<div class="row">
 		<div class="col-md-6 mt-3">
 			<h3>Create New Workflow</h3>
-			<p>In this page, you will create your customized workflow for labellers and provide details on the kind of
+			<p>Here you will create your customized workflow for labellers and provide details on the type of
 				labelling required.</p>
 			<form action="/client/create" method="post">
 				<div class="form-group">
 					<label for="jobName">Workflow Title</label>
 					<input name="jobName" type="text" class="form-control" id="jobName">
 				</div>
-
-
-
 				<div class="form-group">What type of data would you need help in labelling?</div>
 				<div class="form-group form-check form-check-inline">
 					<input class="form-check-input" type="radio" name="dataType" id="inlineRadio1" value="text" checked>
@@ -35,20 +32,20 @@
 				</div>
 
                 <div class="form-group">What type of labels would you need?</div>
-                <div class="form-group">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="language">
-                      <label class="form-check-label" for="language" value="language"> Language </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="sentiment">
-                        <label class="form-check-label" for="sentiment" value="sentiment"> Sentiment </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="topic">
-                        <label class="form-check-label" for="topic" value="topic"> Topic </label>
-                      </div>
-                  </div>
+				<div class="form-group">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" id="language" name="labelType[]" value="language">
+						<label class="form-check-label" for="language"> Language </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" id="sentiment" name="labelType[]" value="sentiment">
+						<label class="form-check-label" for="sentiment" > Sentiment </label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" id="topic" name="labelType[]" value="topic">
+						<label class="form-check-label" for="topic" > Topic </label>
+					</div>
+				</div>
 
 
 

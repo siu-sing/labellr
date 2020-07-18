@@ -8,11 +8,11 @@ router.get('/register', (req, res) => {
 })
 
 //Post and register user
-router.post('/register', (req, res) => {
+router.post('/register',  async (req, res) => {
     console.log(req.body);
     let user = User(req.body);
     try {
-        let saveRes = user.save();
+        let saveRes = await user.save();
         //Direct to login page
         res.redirect("/");
     } catch (error) {

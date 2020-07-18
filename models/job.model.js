@@ -11,19 +11,20 @@ var jobSchema = new mongoose.Schema({
         type: String,
     },
     owner: {
-        type: String,
-        // type: mongoose.Schema.Types.ObjectId,
-        // ref: "Client"
+        // type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     },
     //Number of labels per data point requested by client
     numLabels: Number,
+    dataType: String,
     texts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Text",
     }],
     images: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Text",
+        ref: "Images",
     }],
     // configs: (the configurations for text and image labelling)
 }, {
