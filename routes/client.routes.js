@@ -62,11 +62,22 @@ router.post("/edit/:id", async (req, res) => {
     try {
         let jobDetails = req.body;
         jobDetails["owner"] = req.user._id;
-        let findRes = await Job.findByIdAndUpdate(req.params.id,jobDetails)
+        let findRes = await Job.findByIdAndUpdate(req.params.id, jobDetails)
     } catch (error) {
         console.log(error);
     }
     res.redirect("/client/dashboard")
 });
+
+//Delete
+router.delete("/delete/:id", async (req, res) => {
+    try {
+        let deleteRes = await Job.findByIdAndDelete(req.params.id)
+        res.redirect("/client/dashboard")
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 module.exports = router;

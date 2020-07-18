@@ -16,7 +16,10 @@
         <div><strong>No. of labellers:</strong> <%= "" %> </div>
         <div><strong>Owner:</strong> <%= job.owner.firstname %> <%= job.owner.lastname %></div>
         <% if(currentUser.userType==2){%>
-            <a href="/client/edit/<%= job._id %>" class="btn btn-primary mt-2 float-right">Edit</a>
+            <form method="POST" action="/client/delete/<%= job._id %>?_method=DELETE">
+				<button class="btn btn-danger float-right mx-1" type="submit">Delete</button>
+			</form>
+            <a href="/client/edit/<%= job._id %>" class="btn btn-primary mx-1 float-right">Edit</a>
             <% } %>
 	</div>
 </div>

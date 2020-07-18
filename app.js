@@ -5,6 +5,7 @@ const app = express();
 const passport = require("./config/passportConfig");
 const session = require('express-session');
 const flash = require('connect-flash');
+const methodOverride = require("method-override");
 require("dotenv").config();
 
 //Connect to MongoDB
@@ -29,6 +30,8 @@ app.use(express.urlencoded({
 }));
 app.set("view engine", "ejs");
 app.use(expressEjsLayouts);
+
+app.use(methodOverride("_method"));
 
 /*-- These must be place in the correct place */
 app.use(
