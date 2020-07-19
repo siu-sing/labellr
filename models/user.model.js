@@ -50,6 +50,10 @@ var userSchema = new mongoose.Schema({
                 type: String,
                 enum:["inProgress","complete"],
             },
+            lastLabelled: {
+                type: Number,
+                default: 0,
+            }
         }
     ],
 

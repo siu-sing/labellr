@@ -35,7 +35,7 @@ router.get("/dashboard", async (req, res) => {
             jobs: findRes
         })
     } catch (error) {
-
+        console.log(error);
     }
 
 });
@@ -76,6 +76,30 @@ router.get("/view/:id", async (req, res) => {
         res.render("client/view", {
             job: findRes
         })
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+//Publish - change status from notStarted to inProgress 
+router.get("/publish/:id", async (req, res) => {
+    try {
+        let updateRes = await Job.findByIdAndUpdate(req.params.id,{
+            status:"inProgress"
+        });
+        res.redirect("/client/dashboard");
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+//Close - change status from inProgres to closed
+router.get("/close/:id", async (req, res) => {
+    try {
+        let updateRes = await Job.findByIdAndUpdate(req.params.id,{
+            status:"closed"
+        });
+        res.redirect("/client/dashboard");
     } catch (error) {
         console.log(error);
     }
@@ -127,6 +151,8 @@ router.post('/upload/text_manual', async (req, res) => {
                     texts: saveRes._id,
                 }
             })
+
+            res.redirect(`/client/view/${req.body.job}`);
 
         })
     } catch (error) {

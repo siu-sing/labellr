@@ -18,6 +18,11 @@ var jobSchema = new mongoose.Schema({
     numLabels: Number,
     dataType: String,
     labelType: [String],
+    status: {
+        type: String,
+        default: "notStarted",
+        enum: ["notStarted", "inProgress","closed"]
+    },
     texts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Text",
@@ -30,6 +35,23 @@ var jobSchema = new mongoose.Schema({
 }, {
     timestamps: true,
 });
+
+jobSchema.virtual('statusName').get(function() {
+    let statusname="";
+    switch (this.userType) {
+        case "notStarted":
+            statusname = "Not Published"
+            break;
+        case "inProgress":
+            statusname = "Published"
+            break;
+        case "closed":
+            statusname = "Closed"
+            break;
+    }
+    return statusname;
+});
+
 const Job = mongoose.model("Job", jobSchema);
 module.exports = Job;
 

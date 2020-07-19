@@ -12,18 +12,36 @@
         <div><strong>Created:</strong> <%= job.createdAt.toDateString() %> </div>
         <div><strong>Labels per data point:</strong> <%= job.numLabels %> </div>
         <div><strong>Due Date:</strong> <%= job.dueDate %> </div>
-        <div><strong>Status:</strong> <%= "" %> </div>
+        <div><strong>Status:</strong> <%= job.status %> </div>
         <div><strong>No. of labellers:</strong> <%= "" %> </div>
         <div><strong>No. of data points:</strong> <%= job[`${job.dataType}s`].length %> </div>
         <div><strong>Owner:</strong> <%= job.owner.firstname %> <%= job.owner.lastname %></div>
-        <% if(currentUser.userType!==1){%>
+        <!-- CLIENT  -->
+        <% if(currentUser.userType!==1){ %>
+            
             <form method="POST" action="/client/delete/<%= job._id %>?_method=DELETE">
-				<button class="btn btn-danger float-right mx-1" type="submit">Delete</button>
-			</form>
-            <a href="/client/edit/<%= job._id %>" class="btn btn-primary mx-1 float-right">Edit</a>
-                <% if(showView){ %>
-                    <a href="/client/view/<%= job._id %>" class="btn btn-info mx-1 float-right">View</a>
-                <% } %>
+				<button class="btn btn-danger float-right mx-1 btn-sm" type="submit">Delete</button>
+            </form>
+            
+            <% if(job.status!="closed"){ %>
+            <a href="/client/edit/<%= job._id %>" class="btn btn-primary mx-1 float-right btn-sm">Edit</a>
+            <% } %> 
+
+            <% if(showView){ %>
+                <a href="/client/view/<%= job._id %>" class="btn btn-primary mx-1 float-right btn-sm">View</a>
             <% } %>
+            
+            <% if(job.status=="notStarted"){ %>
+                <a href="/client/publish/<%= job._id %>" class="btn btn-success mx-1 float-right btn-sm">Publish</a>
+            <% } else if (job.status=="inProgress"){ %>
+                <a href="/client/close/<%= job._id %>" class="btn btn-success mx-1 float-right btn-sm">Close Workflow</a>
+            <% } %>
+        
+        <% } %>
+        <!-- LABELLER -->
+        <% if(currentUser.userType==1){ %>
+            <a href="/labeller/label/<%= job._id %>" class="btn btn-success mx-1 float-right btn-sm">Label Data</a>
+        <% } %>
+
 	</div>
 </div>
