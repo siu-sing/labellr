@@ -24,6 +24,18 @@ router.get("/workflows", async (req, res) => {
 
 });
 
+//Display Dashbord - Jobs that labeller currently working on 
+router.get("/dashboard", async (req, res) => {
+    //Find all jobs under user
+    try {
+        let user = await User.findById(req.user._id).populate('labelJobs.job')
+        console.log(user.labelJobs);
+        res.render("labeller/dashboard",{user:user})
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 //Display Labelling page
 router.get("/label/:id", async (req, res) => {
     //Find the job

@@ -48,7 +48,7 @@ router.get("/dashboard", async (req, res) => {
 
         //Get All Users
         let users = await User.find();
-        console.log(users);
+        // console.log(users);
 
         res.render("admin/dashboard", {
             jobs: jobs,

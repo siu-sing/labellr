@@ -1,0 +1,19 @@
+<div class="card my-2">
+	<div class="card-header text-capitalize font-weight-bold">
+		<%= labelJob.job.dataType %> labelling workflow - <% labelJob.job.labelType.forEach((type,idx)=>{ %>
+		<% if(idx>0) { %>
+		<%= ", " %>
+		<% } %>
+		<%= type %>
+		<% })%>
+	</div>
+	<div class="card-body">
+		<h6 class="card-title"><%= labelJob.job.jobName %></h6>
+        <div><strong>Label Status:</strong> <%= labelJob.jobStatus %> </div>
+        <div><strong>You completed:</strong> <%= labelJob.lastLabelled %> labels </div>
+        <div><strong>Total No. of data points:</strong> <%= labelJob.job[`${labelJob.job.dataType}s`].length %> </div>
+            <a href="/labeller/label/<%= labelJob.job._id %>" 
+                class="btn btn-success mx-1 float-right btn-sm <%= labelJob.jobStatus=="complete" ? "disabled" : "" %>"
+                <%= labelJob.jobStatus=="complete" ? "disabled" : "" %>>Label Data</a>
+	</div>
+</div>

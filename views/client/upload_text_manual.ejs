@@ -6,16 +6,10 @@
 	</div>
 	<div class="row">
 		<div class="col mt-3">
+            <h5>Workflow Title: <%= job.jobName %></h5>
             <form action="/client/upload/text_manual" method="post">
-                <div class="form-group">
-                    <label for="job">Which workflow?</label>
-                    <select name="job">
-                        <% jobs.forEach(job=>{ %>
-                        <option value="<%= job._id %>"><%= job.jobName %></option>
-                        <% }) %>
-                    </select>
-                </div>
 				<div class="form-group">
+                    <input name='job' type='hidden' value=<%= job._id %>>
 					<label for="textcontent">Texts to upload:</label>
 					<textarea name="textContents[]" class="form-control mt-3" id="exampleFormControlTextarea1"
 						rows="3"></textarea>

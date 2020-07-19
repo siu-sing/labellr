@@ -119,13 +119,16 @@ router.delete("/delete/:id", async (req, res) => {
 
 //-----TEXT CRUD
 //Upload Page
-router.get('/upload/text_manual', async (req, res) => {
-    let jobs = await Job.find({
-        owner: req.user._id,
-    }, "jobName")
-    res.render('client/upload_text_manual', {
-        jobs
-    });
+router.get('/upload/text_manual/:job_id', async (req, res) => {
+    try {
+        let job = await Job.findById(req.params.job_id);
+        console.log(job);
+        res.render('client/upload_text_manual', {
+            job
+        });
+    } catch (error) {
+        console.log(error);
+    }
 });
 //Push text objects into jobs
 router.post('/upload/text_manual', async (req, res) => {
