@@ -1,0 +1,21 @@
+<div class="container">
+	<div class="row">
+		<div class="col mt-3">
+			<h3>View Workflow Details</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md">
+			<%- include("../job/jobcard", {job:job, showView:false}) %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md">
+			<% job.texts.forEach((text) => { %>
+			<div>
+				<%- include("../text/textcard", {text}) %>
+			</div>
+			<% }) %>
+		</div>
+	</div>
+</div>

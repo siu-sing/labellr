@@ -46,7 +46,7 @@ router.get("/edit/:id", async (req, res) => {
     // console.log(req.params.id);
     try {
         let findRes = await Job.findById(req.params.id);
-        console.log(findRes);
+        // console.log(findRes);
         res.render("client/edit", {
             job: findRes
         })
@@ -68,6 +68,20 @@ router.post("/edit/:id", async (req, res) => {
     res.redirect("/client/dashboard")
 });
 
+//Show One
+router.get("/view/:id", async (req, res) => {
+    try {
+        let findRes = await Job.findById(req.params.id).populate("owner texts");
+        // console.log(findRes);
+        res.render("client/view", {
+            job: findRes
+        })
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
 //Delete
 router.delete("/delete/:id", async (req, res) => {
     try {
@@ -81,12 +95,43 @@ router.delete("/delete/:id", async (req, res) => {
 
 //-----TEXT CRUD
 //Upload Page
-router.get('/upload/text_manual', (req, res) => {
-    res.render('client/upload_text_manual');
+router.get('/upload/text_manual', async (req, res) => {
+    let jobs = await Job.find({
+        owner: req.user._id,
+    }, "jobName")
+    res.render('client/upload_text_manual', {
+        jobs
+    });
 });
-
-router.post('/upload/text_manual', (req, res) => {
+//Push text objects into jobs
+router.post('/upload/text_manual', async (req, res) => {
     console.log(req.body);
+    
+    try {
+        req.body.textContents.forEach( async (t)=>{
+            //Create Text Object
+            let textObj = {
+                jobRef: req.body.job,
+                textContent: t,
+            }
+            
+            //Create Text Mongoose Object
+            let text = Text(textObj);
+            
+            //Save
+            let saveRes = await text.save();
+            console.log(saveRes);
+            // Push Text into Job texts array
+            let updateRes = await Job.findByIdAndUpdate(req.body.job,{
+                $push:{
+                    texts: saveRes._id,
+                }
+            })
+
+        })
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 module.exports = router;

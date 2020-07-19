@@ -14,12 +14,16 @@
         <div><strong>Due Date:</strong> <%= job.dueDate %> </div>
         <div><strong>Status:</strong> <%= "" %> </div>
         <div><strong>No. of labellers:</strong> <%= "" %> </div>
+        <div><strong>No. of data points:</strong> <%= job[`${job.dataType}s`].length %> </div>
         <div><strong>Owner:</strong> <%= job.owner.firstname %> <%= job.owner.lastname %></div>
         <% if(currentUser.userType!==1){%>
             <form method="POST" action="/client/delete/<%= job._id %>?_method=DELETE">
 				<button class="btn btn-danger float-right mx-1" type="submit">Delete</button>
 			</form>
             <a href="/client/edit/<%= job._id %>" class="btn btn-primary mx-1 float-right">Edit</a>
+                <% if(showView){ %>
+                    <a href="/client/view/<%= job._id %>" class="btn btn-info mx-1 float-right">View</a>
+                <% } %>
             <% } %>
 	</div>
 </div>
