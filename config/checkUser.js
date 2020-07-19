@@ -5,7 +5,11 @@
 */
 
 let isAdmin = function (request, response, next) {
-    if (request.user.userType != 0) {
+
+    if(!request.user){
+        request.flash("error", "Log In Required");
+        response.redirect("/auth/login");
+    } else if (request.user.userType != 0) {
         request.flash("error", "Admin Access Only")
         response.redirect("/");
     } else {
@@ -14,7 +18,11 @@ let isAdmin = function (request, response, next) {
 }
 
 let isClient = function (request, response, next) {
-    if (request.user.userType == 1) {
+    
+    if(!request.user){
+        request.flash("error", "Log In Required");
+        response.redirect("/auth/login");
+    } else  if (request.user.userType == 1) {
         request.flash("error", "Client Access Only")
         response.redirect("/");
     } else {
@@ -23,7 +31,11 @@ let isClient = function (request, response, next) {
 }
 
 let isLabeller = function (request, response, next) {
-    if (request.user.userType == 2) {
+    
+    if(!request.user){
+        request.flash("error", "Log In Required");
+        response.redirect("/auth/login");
+    } else if (request.user.userType == 2) {
         request.flash("error", "Labeller Access Only")
         response.redirect("/");
     } else {

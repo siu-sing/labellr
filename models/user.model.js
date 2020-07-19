@@ -52,6 +52,7 @@ var userSchema = new mongoose.Schema({
             },
             lastLabelled: {
                 type: Number,
+                required: true,
                 default: 0,
             }
         }

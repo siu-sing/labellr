@@ -1,5 +1,19 @@
 <div class="card my-2">
 	<div class="card-body">
-		<%= text.textContent %> 
+        <div>
+            <%= text.textContent %> 
+        </div>
+        
+        <% if(showOptions) { %>
+
+            <div class="my-3">
+                <a href="/labeller/label/job/<%= job._id %>/text/<%= text._id %>/sentiment/1" class="btn btn-danger mx-1 btn-sm">Very Negative</a>
+                <a href="/labeller/label/job/<%= job._id %>/text/<%= text._id %>/sentiment/2" class="btn btn-danger mx-1 btn-sm">Negative</a>
+                <a href="/labeller/label/job/<%= job._id %>/text/<%= text._id %>/sentiment/3" class="btn btn-primary mx-1 btn-sm">Neutral</a>
+                <a href="/labeller/label/job/<%= job._id %>/text/<%= text._id %>/sentiment/4" class="btn btn-success mx-1 btn-sm">Positive</a>
+                <a href="/labeller/label/job/<%= job._id %>/text/<%= text._id %>/sentiment/5" class="btn btn-success mx-1 btn-sm">Very Positive</a>
+            </div>
+            
+        <% } %>
 	</div>
 </div>
