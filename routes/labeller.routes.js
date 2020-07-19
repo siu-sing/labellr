@@ -67,15 +67,38 @@ router.get("/label/:id", async (req, res) => {
         // console.log(findRes);
 
         //Filter list of texts to include after the last labelled text onwards
-        let textsDisplay = findRes.texts.slice(lastLabelled,lastLabelled+1);
-        console.log(`LAST LABELLED: ${lastLabelled}`);
-        console.log(`${textsDisplay}`);
+        let textsDisplay = findRes.texts.slice(lastLabelled, lastLabelled + 1);
 
-        //Render only those texts
-        res.render("labeller/label", {
-            job: findRes,
-            texts: textsDisplay
-        })
+        let textsLeft = findRes.texts.length - lastLabelled;
+
+        console.log(`LAST LABELLED: ${lastLabelled}`);
+        console.log(`Length: ${findRes.texts.length}`);
+
+        if (lastLabelled == findRes.texts.length) {
+            //SET user job status to complete
+            let lastLabRes = await User.findOneAndUpdate({
+                _id: userId,
+                "labelJobs.job": req.params.id
+            }, {
+                // SET STATUS
+                $set: {
+                    "labelJobs.$.jobStatus": "complete",
+                }
+            })
+
+            //REDIRECT TO available workflows
+            res.redirect("/labeller/workflows");
+        } else {
+            //Render only those texts
+            res.render("labeller/label", {
+                job: findRes,
+                texts: textsDisplay,
+                textsLeft: textsLeft,
+            })
+        }
+
+
+
     } catch (error) {
         console.log(error);
     }
@@ -99,12 +122,12 @@ router.get("/label/job/:job_id/text/:text_id/sentiment/:sent_score", async (req,
 
         let lastLabRes = await User.findOneAndUpdate({
             _id: userId,
-            "labelJobs.job" : req.params.job_id 
-        },{
+            "labelJobs.job": req.params.job_id
+        }, {
             //increment lastlabelled by 1
-           $inc: {
-               "labelJobs.$.lastLabelled": 1,
-           } 
+            $inc: {
+                "labelJobs.$.lastLabelled": 1,
+            }
         })
 
         res.redirect(`/labeller/label/${req.params.job_id}`)
