@@ -24,30 +24,23 @@ router.get("/workflows", async (req, res) => {
 
 });
 
-
-
-
 //Display Labelling page
 router.get("/label/:id", async (req, res) => {
-    console.log(req.params.id)
     //Find the job
     try {
         let userId = req.user._id;
         let lastLabelled = 0;
+        
         //Check if users list of jobs includes the job
         let findObj = await User.findById(userId, "labelJobs -_id");
+        
         let jobExists = false;
         findObj.labelJobs.forEach((j) => {
-            console.log(`Searching jobid: ${j.job}`);
             if (j.job.equals(req.params.id)) {
                 jobExists = true;
                 lastLabelled = j.lastLabelled;
-                console.log(`inside if statmet, lastlabelled: ${j.lastLabelled}`)
             }
         });
-
-        console.log(`JOBEXISTS: ${jobExists}`)
-        console.log(`lastLabelled: ${lastLabelled}`)
 
         //If job does not exist in users list, push it in and update status
         if (!jobExists) {
@@ -59,22 +52,21 @@ router.get("/label/:id", async (req, res) => {
                     }
                 }
             })
-            console.log(updateRes);
+            console.log("User taking on new job")
         }
 
-        //Get lists of texts from Job
+        //Get lists of texts from Job to display
         let findRes = await Job.findById(req.params.id).populate("texts");
-        // console.log(findRes);
 
         //Filter list of texts to include after the last labelled text onwards
         let textsDisplay = findRes.texts.slice(lastLabelled, lastLabelled + 1);
 
+        //Get number of texts left to label
         let textsLeft = findRes.texts.length - lastLabelled;
 
-        console.log(`LAST LABELLED: ${lastLabelled}`);
-        console.log(`Length: ${findRes.texts.length}`);
-
+        //If there are no more to label, update status and redirect to dashboard
         if (lastLabelled == findRes.texts.length) {
+            
             //SET user job status to complete
             let lastLabRes = await User.findOneAndUpdate({
                 _id: userId,
@@ -86,9 +78,11 @@ router.get("/label/:id", async (req, res) => {
                 }
             })
 
-            //REDIRECT TO available workflows
+            //Redirect back to dashboard
             res.redirect("/labeller/workflows");
+        
         } else {
+            
             //Render only those texts
             res.render("labeller/label", {
                 job: findRes,
@@ -97,8 +91,6 @@ router.get("/label/:id", async (req, res) => {
             })
         }
 
-
-
     } catch (error) {
         console.log(error);
     }
@@ -106,20 +98,18 @@ router.get("/label/:id", async (req, res) => {
 
 
 router.get("/label/job/:job_id/text/:text_id/sentiment/:sent_score", async (req, res) => {
-    // console.log(`textID ${req.params.text_id}`);
-    // console.log(`sentScore ${req.params.sent_score}`);
-    console.log(req.params);
 
     try {
         let userId = req.user._id;
-        //User upon submission of sentiment
-        //Push sentiment into text's sentiment list
+        
+        //Add sentiment score to text object
         let sentRes = await Text.findByIdAndUpdate(req.params.text_id, {
             $push: {
                 sentLabel: req.params.sent_score,
             }
         })
 
+        //Increment lastlabelled by one
         let lastLabRes = await User.findOneAndUpdate({
             _id: userId,
             "labelJobs.job": req.params.job_id
@@ -131,14 +121,10 @@ router.get("/label/job/:job_id/text/:text_id/sentiment/:sent_score", async (req,
         })
 
         res.redirect(`/labeller/label/${req.params.job_id}`)
-        //IF user labels the last one,
-        //Set jobstatus to complete
-        //Redirect to available workflows
+
     } catch (error) {
         console.log(error);
     }
-
-
 
 });
 
