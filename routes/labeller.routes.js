@@ -96,7 +96,7 @@ router.get("/label/:id", async (req, res) => {
     }
 });
 
-
+//When user submits a sentiment label
 router.get("/label/job/:job_id/text/:text_id/sentiment/:sent_score", async (req, res) => {
 
     try {
@@ -120,6 +120,7 @@ router.get("/label/job/:job_id/text/:text_id/sentiment/:sent_score", async (req,
             }
         })
 
+        //Redirect back to same page, but with new text to label
         res.redirect(`/labeller/label/${req.params.job_id}`)
 
     } catch (error) {

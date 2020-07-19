@@ -52,7 +52,7 @@
 				<div class="col">
 					<% jobs.forEach(job => { %>
 					<div>
-						<%- include("../job/jobcard", {job:job}) %>
+						<%- include("../job/jobcard", {job:job, showView:true}) %>
 					</div>
 					<% }) %>
 				</div>
