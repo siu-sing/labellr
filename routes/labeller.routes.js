@@ -31,8 +31,8 @@ router.get("/workflows", async (req, res) => {
         let jobsToDisplay = [];
         //FOREACH job in allJobs
         allJobs.forEach(job => {
-            console.log(`Comparing: ${job.jobName}`)
-            console.log(`Is In User Job list? ${isInArray(job._id,userJobIds)}`)
+            // console.log(`Comparing: ${job.jobName}`)
+            // console.log(`Is In User Job list? ${isInArray(job._id,userJobIds)}`)
             //if _id doesn't match any in userJobIds, push into jobsToDisplay 
             if(!isInArray(job._id,userJobIds)){
                 jobsToDisplay.push(job);
@@ -43,7 +43,7 @@ router.get("/workflows", async (req, res) => {
         res.render("labeller/workflows", {
             jobs: jobsToDisplay
         })
-        
+
     } catch (error) {
         console.log(error);
     }

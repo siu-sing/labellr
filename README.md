@@ -31,11 +31,11 @@ Clients here refer to data scientists who needs some training data labelled.
 | Admin<br>Labeller<br>Client | textContent, length<br>labelled language<br>labelled sentiment<br>labelled topic | imageUrl<br>type of label<br>result of label |
 
 ### MVP:
-- CRUD for Labeller, Text
-- Login for Admin, Labeller
-- Allow Admin to CRUD everything
+- CRUD for Text Model
+- Login for Admin, Labeller and Client
+- Routes for Labeller and Client
+- Allow Admin to view all routes 
 - Allow a labeller to label a piece of text with 
-    - language (e.g. EN, ID, PH, not sure) 
     - sentiment (1 for negative, 5 for positive, 3 for neutral, "not sure" for not sure)
 
 ### Furthers:
@@ -53,3 +53,5 @@ Clients here refer to data scientists who needs some training data labelled.
 - Analytics for labels, stats for the labels etc
  
  https://www.techighness.com/post/node-expressjs-endpoint-to-upload-and-process-csv-file/
+
+ https://github.com/C2FO/fast-csv/tree/master/examples/parsing-js

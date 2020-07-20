@@ -1,30 +1,127 @@
-
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6 align-self-center">
-            <div class="row">
-                <div class="col-md-4 text-center">
-                    <img src="/img/logo_transparent.png" style="max-width: 100%;" width="150px" alt="logo_transparent">
-                </div>
-                <div class="col-md-8 my-3">
-                    <div class="leading-text text-center text-md-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsum, nobis laudantium, neque consectetur fugiat, nihil iusto officia quas ipsam quasi omnis qui beatae? Accusantium soluta itaque laboriosam non reprehenderit.</div>
-                </div>
-            </div>
-        </div>
-            <div class="col-md-6 <% if(currentUser){%>
-                <%= "d-none"  %>
-                <% } %> 
-                ">    
-            <div class="row">
-                <div class="col-md"><%- include("auth/login") %></div>
-            </div>
-            <div class="row"> <div class="col my-1"> <hr /></div>  </div>
-            <div class="row">
-                <div class="col-md text-center">
-                    Don't have an account? <br> Register as a Labeller or Client here. <br>
-                    <a class="btn btn-outline-dark my-3" style="background-color:#99B0B4;" href="auth/register">Register</a>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-md-6 align-self-center">
+			<div class="row">
+				<div class="col-md-4 text-center">
+					<img src="/img/logo_transparent.png" style="max-width: 100%;" width="150px" alt="logo_transparent">
+				</div>
+				<div class="col-md-8 my-3">
+					<div class="leading-text text-center text-md-left">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+						Temporibus ipsum, nobis laudantium, neque consectetur fugiat, nihil iusto officia quas ipsam quasi omnis qui
+						beatae? Accusantium soluta itaque laboriosam non reprehenderit.</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<!-- NOT LOGGED ON -->
+			<% if(!currentUser){ %>
+			<div class="row">
+				<div class="col-md"><%- include("auth/login") %></div>
+			</div>
+			<div class="row">
+				<div class="col my-1">
+					<hr />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md text-center">
+					Don't have an account? <br> Register as a Labeller or Client here. <br>
+					<a class="btn btn-outline-dark my-3" style="background-color:#99B0B4;" href="auth/register">Register</a>
+				</div>
+			</div>
+
+			<!-- LABELLER -->
+			<% } else if(currentUser.userType==1) { %>
+			<div class="row">
+				<div class="col text-center">
+					<h4>Welcome, <%= currentUser.firstname %>.</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col my-1">
+					<hr />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center">
+					<a class="btn btn-outline-dark my-3" style="background-color:#99B0B4;" href="/labeller/workflows">See All
+						Available Workflows</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center">
+					or
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center">
+					<a class="btn btn-outline-dark my-3" style="background-color:#99B0B4;" href="/labeller/dashboard">Go to your
+						Dashboard</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col my-1">
+					<hr />
+				</div>
+			</div>
+			<!-- CLIENT -->
+			<% } else if(currentUser.userType==2) { %>
+			<div class="row">
+				<div class="col text-center">
+					<h4>Welcome, <%= currentUser.firstname %>.</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col my-1">
+					<hr />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center">
+					<a class="btn btn-outline-dark my-3" style="background-color:#99B0B4;" href="/client/dashboard">Go to your
+						Dashboard</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center">
+					or
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center">
+					<a class="btn btn-outline-dark my-3" style="background-color:#99B0B4;" href="/client/create">Create New
+						Workflow</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col my-1">
+					<hr />
+				</div>
+			</div>
+			<!-- ADMIN -->
+			<% } else if(currentUser.userType==0) { %>
+			<div class="row">
+				<div class="col text-center">
+					<h4>Admin</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col my-1">
+					<hr />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col text-center">
+					<a class="btn btn-outline-dark my-3" style="background-color:#99B0B4;" href="/admin/dashboard">Go to
+						Dashboard</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col my-1">
+					<hr />
+				</div>
+			</div>
+			<% } %>
+		</div>
+	</div>
 </div>
