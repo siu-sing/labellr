@@ -11,18 +11,56 @@ const {
 router.get("/workflows", async (req, res) => {
     //FIND ALL AVAILABLE JOBS TO DISPLAY
     try {
-        let findRes = await Job.find({
+        
+        //Get All Jobs in progress
+        let allJobs = await Job.find({
             status: "inProgress"
         }).populate("owner");
-        // console.log(findRes);
+        console.log(allJobs);
+
+        //Get all jobs in users's job list
+        let user = await User.findById(req.user._id, "labelJobs")
+        console.log(user);
+
+        let userJobIds = [];
+        user.labelJobs.forEach( labelJob => {
+            userJobIds.push(labelJob.job);
+        });
+        //Exclude users job list from the all jobs in progress
+        
+        let jobsToDisplay = [];
+        //FOREACH job in allJobs
+        allJobs.forEach(job => {
+            console.log(`Comparing: ${job.jobName}`)
+            console.log(`Is In User Job list? ${isInArray(job._id,userJobIds)}`)
+            //if _id doesn't match any in userJobIds, push into jobsToDisplay 
+            if(!isInArray(job._id,userJobIds)){
+                jobsToDisplay.push(job);
+            }
+        });
+        
+        //Render the resulting list of jobs
         res.render("labeller/workflows", {
-            jobs: findRes
+            jobs: jobsToDisplay
         })
+        
     } catch (error) {
         console.log(error);
     }
 
 });
+
+
+//function - given an ID, and an array of IDs, return true if is found, false if not found
+let isInArray = function(_id,A){
+    let isInArray = false;
+    A.forEach(item => {
+        if(item.equals(_id)){
+            isInArray = true;
+        }
+    });
+    return isInArray;
+}
 
 //Display Dashbord - Jobs that labeller currently working on 
 router.get("/dashboard", async (req, res) => {
@@ -70,7 +108,7 @@ router.get("/label/:id", async (req, res) => {
         //Get lists of texts from Job to display
         let findRes = await Job.findById(req.params.id).populate("texts");
 
-        //Filter list of texts to include after the last labelled text onwards
+        //Filter list of texts to include one after the last labelled text 
         let textsDisplay = findRes.texts.slice(lastLabelled, lastLabelled + 1);
 
         //Get number of texts left to label
