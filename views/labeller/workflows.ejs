@@ -5,12 +5,21 @@
         </div>
     </div>
     <div class="row">
-        <% jobs.forEach(job => { %>
-        <div class="col-md-6">
-                <div>
-                    <%- include("../job/jobcard", {job:job, showView:true}) %>
+
+        <% if(jobs.length==0) { %>
+            <div class="col">
+                <div>No workflows available now. Check your <a href="/labeller/dashboard">Dashboard</a> for any uncompleted workflows.</div>
+            </div>
+        <% } else { %>
+            <% jobs.forEach(job => { %>
+                <div class="col-md-6">
+                        <div>
+                            <%- include("../job/jobcard", {job:job, showView:true}) %>
+                        </div>
                 </div>
-        </div>
-        <% }) %>
+                <% }) %>
+        <% } %> 
+
+        
     </div>
 </div>
