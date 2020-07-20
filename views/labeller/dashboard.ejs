@@ -5,12 +5,21 @@
         </div>
     </div>
     <div class="row">
-        <% user.labelJobs.forEach( labelJob => { %>
-        <div class="col-md-6">
-                <div>
-                    <%- include("../labeller/labeljobcard", {labelJob}) %>
+
+        <% if(user.labelJobs.length==0){ %>
+            <div class="col">
+                <div>You have no active workflows. Check the <a href="/labeller/workflows">Available Workflows</a> page for new assignments.</div>
+            </div>
+        <% } else { %>
+            <% user.labelJobs.forEach( labelJob => { %>
+                <div class="col-md-6">
+                        <div>
+                            <%- include("../labeller/labeljobcard", {labelJob}) %>
+                        </div>
                 </div>
-        </div>
-        <% }) %>
+                <% }) %>
+        <% } %> 
+
+        
     </div>
 </div>

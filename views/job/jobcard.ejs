@@ -19,10 +19,12 @@
         <!-- CLIENT  -->
         <% if(currentUser.userType!==1){ %>
             
-            <form method="POST" action="/client/delete/<%= job._id %>?_method=DELETE">
+            <% if(currentUser.userType==0){ %>
+            <form method="POST" action="/admin/delete/<%= job._id %>?_method=DELETE">
 				<button class="btn btn-danger float-right mx-1 btn-sm" type="submit">Delete</button>
             </form>
-            
+            <% } %>
+
             <% if(job.status!="closed"){ %>
             <a href="/client/edit/<%= job._id %>" class="btn btn-primary mx-1 float-right btn-sm">Edit</a>
             <% } %> 

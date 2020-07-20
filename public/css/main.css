@@ -1,7 +1,50 @@
-body {
-    font-family: 'Roboto', sans-serif;
+body, html {
+    font-family: 'Open Sans', sans-serif;
+    height: 100%;
+}
+
+.background-dark {
+    background-color: #aaaaaa;
 }
 
 .navbar-brand {
     font-family: 'PT Sans', sans-serif;
+}
+
+.full-height {
+    height:100%
+}
+
+.text__italics {
+    font-style: italic;
+}
+
+
+.btn-vnegative, .btn-negative, .btn-neutral, .btn-positive, .btn-vpositive {
+    color: #333333;
+    width:90px;
+    /* max-width: 90px; */
+    border-radius: 25px;
+    /* display:inline; */
+    /* width:100%; */
+}
+
+.btn-sent:hover {
+    filter: brightness(120%);
+}
+
+.btn-vnegative {
+    background-color: rgba(221, 62, 84, 0.7) !important;
+}
+.btn-negative {
+    background-color: rgba(192, 103, 96, 0.7) !important;
+}
+.btn-neutral {
+    background-color: rgba(164, 145, 108, 0.7) !important;
+}
+.btn-positive {
+    background-color: rgb(135, 187, 120, 0.7) !important;
+}
+.btn-vpositive {
+    background-color: rgba(107, 229, 133, 0.7) !important;
 }

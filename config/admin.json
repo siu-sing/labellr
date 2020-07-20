@@ -1,0 +1,11 @@
+{
+    "userType" : 0,
+    "email" : "admin@admin.com",
+    "password" : "$2b$10$doaag3ehguXZIkhfKnrjd.6jWchuoYixhN/cbfTDiTD9cX4YuvfrG",
+    "firstname" : "Admin",
+    "lastname" : " ",
+    "gender" : "",
+    "dateOfBirth" : "2000-01-01",
+    "languagePref" : "",
+    "labelJobs" : []
+}

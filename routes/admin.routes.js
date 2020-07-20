@@ -61,4 +61,14 @@ router.get("/dashboard", async (req, res) => {
 
 });
 
+//Delete
+router.delete("/delete/:id", async (req, res) => {
+    try {
+        let deleteRes = await Job.findByIdAndDelete(req.params.id)
+        res.redirect("/admin/dashboard")
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 module.exports = router;

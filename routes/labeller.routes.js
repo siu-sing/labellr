@@ -138,6 +138,7 @@ router.get("/label/:id", async (req, res) => {
                 job: findRes,
                 texts: textsDisplay,
                 textsLeft: textsLeft,
+                lastLabelled: lastLabelled,
             })
         }
 
