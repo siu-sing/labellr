@@ -52,3 +52,4 @@ Clients here refer to data scientists who needs some training data labelled.
 - Convert to chat bot for labelling on the go
 - Analytics for labels, stats for the labels etc
  
+ https://www.techighness.com/post/node-expressjs-endpoint-to-upload-and-process-csv-file/

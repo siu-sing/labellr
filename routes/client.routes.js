@@ -1,7 +1,14 @@
 const router = require("express").Router();
 const Job = require('../models/job.model');
 const Text = require('../models/text.model');
+const multer = require('multer');
+const upload = multer({
+    dest: 'tmp/csv/'
+});
+const csv = require('fast-csv');
+const fs = require('fs');
 
+//------ JOB CRUD
 //Create Route
 router.get('/create', (req, res) => {
     res.render('client/create');
@@ -84,8 +91,8 @@ router.get("/view/:id", async (req, res) => {
 //Publish - change status from notStarted to inProgress 
 router.get("/publish/:id", async (req, res) => {
     try {
-        let updateRes = await Job.findByIdAndUpdate(req.params.id,{
-            status:"inProgress"
+        let updateRes = await Job.findByIdAndUpdate(req.params.id, {
+            status: "inProgress"
         });
         res.redirect("/client/dashboard");
     } catch (error) {
@@ -96,15 +103,14 @@ router.get("/publish/:id", async (req, res) => {
 //Close - change status from inProgres to closed
 router.get("/close/:id", async (req, res) => {
     try {
-        let updateRes = await Job.findByIdAndUpdate(req.params.id,{
-            status:"closed"
+        let updateRes = await Job.findByIdAndUpdate(req.params.id, {
+            status: "closed"
         });
         res.redirect("/client/dashboard");
     } catch (error) {
         console.log(error);
     }
 });
-
 
 //Delete
 router.delete("/delete/:id", async (req, res) => {
@@ -122,7 +128,7 @@ router.delete("/delete/:id", async (req, res) => {
 router.get('/upload/text_manual/:job_id', async (req, res) => {
     try {
         let job = await Job.findById(req.params.job_id);
-        console.log(job);
+        // console.log(job);
         res.render('client/upload_text_manual', {
             job
         });
@@ -133,24 +139,24 @@ router.get('/upload/text_manual/:job_id', async (req, res) => {
 //Push text objects into jobs
 router.post('/upload/text_manual', async (req, res) => {
     console.log(req.body);
-    
+
     try {
-        req.body.textContents.forEach( async (t)=>{
+        req.body.textContents.forEach(async (t) => {
             //Create Text Object
             let textObj = {
                 jobRef: req.body.job,
                 textContent: t,
             }
-            
+
             //Create Text Mongoose Object
             let text = Text(textObj);
-            
+
             //Save
             let saveRes = await text.save();
-            console.log(saveRes);
+            // console.log(saveRes);
             // Push Text into Job texts array
-            let updateRes = await Job.findByIdAndUpdate(req.body.job,{
-                $push:{
+            let updateRes = await Job.findByIdAndUpdate(req.body.job, {
+                $push: {
                     texts: saveRes._id,
                 }
             })
@@ -162,5 +168,54 @@ router.post('/upload/text_manual', async (req, res) => {
         console.log(error);
     }
 });
+
+//Upload CSV
+router.get('/upload/text_csv/:job_id', async (req, res) => {
+    try {
+        let job = await Job.findById(req.params.job_id);
+        res.render('client/upload_text_csv', {
+            job
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+router.post('/upload/text_csv', upload.single('file'), (req, res) => {
+    const fileRows = [];
+    console.log(req.body.job);
+    console.log(req.file);
+    csv.parseFile(req.file.path)
+        .on("data", async (data) => {
+
+            // Create text object
+            let textObj = {
+                jobRef: req.body.job,
+                textContent: data[0],
+            }
+
+            //Create Text Mongoose Object
+            let text = Text(textObj);
+
+            try {
+                //Save
+                let saveRes = await text.save();
+                // console.log(saveRes);
+                // Push Text into Job texts array
+                let updateRes = await Job.findByIdAndUpdate(req.body.job, {
+                    $push: {
+                        texts: saveRes._id,
+                    }
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        })
+        .on("end", function () {
+            fs.unlinkSync(req.file.path); // remove temp file
+            res.redirect(`/client/view/${req.body.job}`);
+        })
+});
+
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const expressEjsLayouts = require('express-ejs-layouts');
+
 const app = express();
 const passport = require("./config/passportConfig");
 const session = require('express-session');
