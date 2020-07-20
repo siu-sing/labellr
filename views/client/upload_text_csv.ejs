@@ -9,10 +9,11 @@
 			<h5>Workflow title: <%= job.jobName %> </h5>
 			<form action="/client/upload/text_csv" enctype="multipart/form-data" method="post">
 				<div class="form-group">
-                    <input name='job' type='hidden' value=<%= job._id %>>
+					<input name='job' type='hidden' value=<%= job._id %>>
 					<div>
-                        <input type="file" class="form-control-file bg-light" name="file">
-                        <small id="file" class="form-text text-muted">Please ensure file is in CSV format, contains only 1 column and has no headers.</small>
+						<input type="file" class="form-control-file bg-light" name="file">
+						<small id="file" class="form-text text-muted">Please ensure file is in CSV format, contains only 1 column
+							and has no headers.</small>
 					</div>
 					<div>
 						<button type="submit" class="btn btn-outline-dark my-3" style="background-color:#99B0B4;">Upload</button>

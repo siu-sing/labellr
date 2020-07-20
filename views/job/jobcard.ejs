@@ -32,11 +32,11 @@
             <% } %>
             
             <% if(job.status=="notStarted"){ %>
-                <a href="/client/upload/text_manual/<%= job._id %>" class="btn btn-primary mx-1 float-right btn-sm">Manual Upload Data</a>
+                <!-- <a href="/client/upload/text_manual/<%= job._id %>" class="btn btn-primary mx-1 float-right btn-sm">Manual Upload Data</a> -->
                 <a href="/client/upload/text_csv/<%= job._id %>" class="btn btn-primary mx-1 float-right btn-sm">Upload CSV</a>
                 <a href="/client/publish/<%= job._id %>" class="btn btn-success mx-1 float-right btn-sm">Publish</a>
             <% } else if (job.status=="inProgress"){ %>
-                <a href="/client/close/<%= job._id %>" class="btn btn-success mx-1 float-right btn-sm">Close Workflow</a>
+                <a href="/client/close/<%= job._id %>" class="btn btn-primary mx-1 float-right btn-sm">Close Workflow</a>
             <% } %>
         
         <% } %>
