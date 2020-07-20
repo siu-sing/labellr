@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mt-3">
+            <h4>Account Details</h4>
+            <div>
+                <strong>Name:</strong> <%= user.firstname %> <%= user.lastname %> 
+            </div>
+            <div>
+                <strong>Email:</strong> <%= user.email %>
+            </div>
+            <div>
+                <strong>Gender:</strong> <%= user.gender %>
+            </div>
+            <div>
+                <strong>Date of Birth:</strong> <%= user.dateOfBirth %>
+            </div>
+            <div>
+                <strong>Language Preference:</strong> <%= user.languagePref ? user.languagePref : "Unspecified" %>
+            </div>
+            <div class="my-1">
+                <hr />
+            </div>
+            <h4>Workflow Details</h4>
+            <div>
+                <strong>Lifetime Labels:</strong> <%= stats.lifetimeLabels %>
+            </div>
+            <div>
+                <strong>Completed:</strong> <%= stats.completedJobs %>
+            </div>
+            <div>
+                <strong>In Progress:</strong> <%= stats.inProgressJobs %>
+            </div>
+
+        </div>
+    </div>
+</div>

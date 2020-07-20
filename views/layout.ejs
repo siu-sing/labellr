@@ -28,7 +28,7 @@
 				<!-- All Users -->
 				<% if(currentUser){%>
 				<li class="nav-item">
-					<a class="nav-link" href="/account">Account</a>
+					<a class="nav-link" href="/<%= currentUser.userType==1 ? "labeller" : "client" %>/account">Account</a>
 				</li>
 
 				<!-- User is client -->

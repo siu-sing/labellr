@@ -6,12 +6,47 @@ const {
     find
 } = require("../models/job.model");
 
+//Account Page
+router.get("/account", async (req, res) => {
+
+    try {
+        let user = await User.findById(req.user._id).populate('labelJobs.job');
+
+        //Basic User Stats
+        let lifetimeLabels = 0;
+        let completedJobs = 0;
+        let inProgressJobs = 0;
+        user.labelJobs.forEach(lj => {
+            lifetimeLabels += lj.lastLabelled
+            switch (lj.jobStatus) {
+                case "complete":
+                    completedJobs++;
+                    break;
+                case "inProgress":
+                    inProgressJobs++;
+                    break;
+            }
+        });
+
+        res.render("labeller/account", {
+            user: user,
+            stats: {
+                lifetimeLabels,
+                completedJobs,
+                inProgressJobs
+            }
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 //Display Workflows - ALL JOBS
 router.get("/workflows", async (req, res) => {
     //FIND ALL AVAILABLE JOBS TO DISPLAY
     try {
-        
+
         //Get All Jobs in progress
         let allJobs = await Job.find({
             status: "inProgress"
@@ -23,22 +58,22 @@ router.get("/workflows", async (req, res) => {
         console.log(user);
 
         let userJobIds = [];
-        user.labelJobs.forEach( labelJob => {
+        user.labelJobs.forEach(labelJob => {
             userJobIds.push(labelJob.job);
         });
         //Exclude users job list from the all jobs in progress
-        
+
         let jobsToDisplay = [];
         //FOREACH job in allJobs
         allJobs.forEach(job => {
             // console.log(`Comparing: ${job.jobName}`)
             // console.log(`Is In User Job list? ${isInArray(job._id,userJobIds)}`)
             //if _id doesn't match any in userJobIds, push into jobsToDisplay 
-            if(!isInArray(job._id,userJobIds)){
+            if (!isInArray(job._id, userJobIds)) {
                 jobsToDisplay.push(job);
             }
         });
-        
+
         //Render the resulting list of jobs
         res.render("labeller/workflows", {
             jobs: jobsToDisplay
@@ -50,12 +85,11 @@ router.get("/workflows", async (req, res) => {
 
 });
 
-
 //function - given an ID, and an array of IDs, return true if is found, false if not found
-let isInArray = function(_id,A){
+let isInArray = function (_id, A) {
     let isInArray = false;
     A.forEach(item => {
-        if(item.equals(_id)){
+        if (item.equals(_id)) {
             isInArray = true;
         }
     });
@@ -68,7 +102,9 @@ router.get("/dashboard", async (req, res) => {
     try {
         let user = await User.findById(req.user._id).populate('labelJobs.job')
         console.log(user.labelJobs);
-        res.render("labeller/dashboard",{user:user})
+        res.render("labeller/dashboard", {
+            user: user
+        })
     } catch (error) {
         console.log(error);
     }
@@ -80,10 +116,10 @@ router.get("/label/:id", async (req, res) => {
     try {
         let userId = req.user._id;
         let lastLabelled = 0;
-        
+
         //Check if users list of jobs includes the job
         let findObj = await User.findById(userId, "labelJobs -_id");
-        
+
         let jobExists = false;
         findObj.labelJobs.forEach((j) => {
             if (j.job.equals(req.params.id)) {
@@ -116,7 +152,7 @@ router.get("/label/:id", async (req, res) => {
 
         //If there are no more to label, update status and redirect to dashboard
         if (lastLabelled == findRes.texts.length) {
-            
+
             //SET user job status to complete
             let lastLabRes = await User.findOneAndUpdate({
                 _id: userId,
@@ -130,9 +166,9 @@ router.get("/label/:id", async (req, res) => {
 
             //Redirect back to dashboard
             res.redirect("/labeller/workflows");
-        
+
         } else {
-            
+
             //Render only those texts
             res.render("labeller/label", {
                 job: findRes,
@@ -152,7 +188,7 @@ router.get("/label/job/:job_id/text/:text_id/sentiment/:sent_score", async (req,
 
     try {
         let userId = req.user._id;
-        
+
         //Add sentiment score to text object
         let sentRes = await Text.findByIdAndUpdate(req.params.text_id, {
             $push: {
