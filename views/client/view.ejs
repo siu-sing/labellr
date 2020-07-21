@@ -5,9 +5,12 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md">
+		<div class="col-md-6">
 			<%- include("../job/jobcard", {job:job, showView:false}) %>
-		</div>
+        </div>
+        <div class="col-md-6">
+			<%- include("../job/jobstatscard", {job:job, showView:false}) %>
+        </div>
 	</div>
 	<div class="row">
 		<div class="col-md">

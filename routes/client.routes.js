@@ -1,12 +1,17 @@
 const router = require("express").Router();
+const mongoose = require("mongoose");
 const Job = require('../models/job.model');
 const Text = require('../models/text.model');
+const User = require('../models/user.model');
 const multer = require('multer');
 const upload = multer({
     dest: 'tmp/csv/'
 });
 const csv = require('fast-csv');
 const fs = require('fs');
+const {
+    runInNewContext
+} = require("vm");
 
 //------ JOB CRUD
 //Create Route
@@ -78,15 +83,96 @@ router.post("/edit/:id", async (req, res) => {
 //Show One
 router.get("/view/:id", async (req, res) => {
     try {
-        let findRes = await Job.findById(req.params.id).populate("owner texts");
-        // console.log(findRes);
+        let job = await Job.findById(req.params.id).populate("owner texts");
+        console.log(req.params.id)
+
+        //Generate summary stats for job
+        let numLabellers = await User.aggregate([{
+                $unwind: '$labelJobs'
+            },
+            {
+                $match: {
+                    'labelJobs.job': new mongoose.Types.ObjectId(req.params.id)
+                }
+            },
+            {
+                $group: {
+                    _id: '$labelJobs.jobStatus',
+                    "total": {
+                        "$sum": 1
+                    }
+                }
+            },
+            {
+                $project: {
+                    "_id": 0,
+                    "jobStatus": "$_id",
+                    "total": 1,
+                }
+            },
+            {
+                $sort: {
+                    jobStatus: -1
+                },
+            }
+        ])
+
+        let labellerStats = {};
+        numLabellers.forEach(res => {
+            labellerStats[res.jobStatus] = res.total;
+        });
+
+
+        //Generate summary stats for labels
+        //get length of sentLabel > job.numLabels
+        let numLabelledData = 0;
+        let numUsefulData = 0;
+        job.texts.forEach(text => {
+            if (text.sentLabel.length >= job.numLabels) {
+                numLabelledData++;
+            }
+            if (areLabelsDecisive(text.sentLabel)) {
+                numUsefulData++;
+            }
+        });
+
+        console.log(labellerStats);
+
         res.render("client/view", {
-            job: findRes
+            job: job,
+            labellerStats: labellerStats,
+            dataStats: {
+                numLabelledData,
+                numUsefulData
+            }
         })
     } catch (error) {
         console.log(error);
     }
 });
+
+//function - given array of sent scores,
+//check if more than half the labels are in the same half        
+let areLabelsDecisive = function (A) {
+    let neg = 0;
+    let pos = 0;
+    let neu = 0;
+    A.forEach(s => {
+        if (s > 3) {
+            pos++;
+        } else if (s < 3) {
+            neg++;
+        } else if (s == 3) {
+            neu++;
+        }
+    });
+    //SentLabels must have min of 3, If any of the sentiments have "majority", then labels are decisive
+    if (A.length >= 3 && (pos > (A.length / 2) || neg > (A.length / 2) || neu > (A.length / 2))) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 //Publish - change status from notStarted to inProgress 
 router.get("/publish/:id", async (req, res) => {
@@ -112,16 +198,15 @@ router.get("/close/:id", async (req, res) => {
     }
 });
 
-//Delete
-router.delete("/delete/:id", async (req, res) => {
-    try {
-        let deleteRes = await Job.findByIdAndDelete(req.params.id)
-        res.redirect("/client/dashboard")
-    } catch (error) {
-        console.log(error);
-    }
-});
-
+// //Delete
+// router.delete("/delete/:id", async (req, res) => {
+//     try {
+//         let deleteRes = await Job.findByIdAndDelete(req.params.id)
+//         res.redirect("/client/dashboard")
+//     } catch (error) {
+//         console.log(error);
+//     }
+// });
 
 //-----TEXT CRUD
 //Upload Page
@@ -216,6 +301,5 @@ router.post('/upload/text_csv', upload.single('file'), (req, res) => {
             res.redirect(`/client/view/${req.body.job}`);
         })
 });
-
 
 module.exports = router;

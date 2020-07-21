@@ -1,0 +1,22 @@
+<div class="card my-2">
+	<div class="card-header text-capitalize font-weight-bold">
+		Summary Stats
+	</div>
+	<div class="card-body">
+		<h6 class="card-title"></h6>
+        <div>
+            <strong>Total Labellers:</strong> <%= labellerStats.complete+labellerStats.inProgress %> |
+            <span class="font-italic text-muted"><%= labellerStats.inProgress %> in progress, <%= labellerStats.complete %> complete.</span>
+        </div>
+		<div><strong>Progress:</strong> <%= dataStats.numLabelledData %>/<%=job.texts.length %> have at least <%= job.numLabels %> labels.</div>
+        <div><strong>Total useful data points:</strong> <%= dataStats.numUsefulData %> </div>
+        <small class="text-muted font-italic"><%= dataStats.numUsefulData %> data points have decisive labels i.e. more than half of the labels for these data points have the same sentiment.</small>
+        <!-- CLIENT or ADMIN  -->
+        <div>
+            <% if(currentUser.userType!==1){ %>
+                <a href="/client/download/<%= job._id %>" 
+                    class="btn btn-secondary mx-1 float-right btn-sm disabled" disabled>Download Results</a>
+            <% } %>
+        </div>
+	</div>
+</div>

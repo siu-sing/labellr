@@ -1,6 +1,6 @@
 <div class="card my-2 w-75 mx-auto">
 	<div class="card-body">
-        <div class="font-italic">
+        <div class="font-italic text-center">
             <%= text.textContent %> 
         </div>
         
@@ -15,6 +15,9 @@
                 <a href="/labeller/label/job/<%= job._id %>/text/<%= text._id %>/sentiment/5" class="btn btn-light btn-sent btn-vpositive mx-1 btn-sm">5</a>
                 Positive
             </div>
+<!-- <div class="my-3 text-center">
+    <a href="/labeller/label/job/<%= job._id %>/text/<%= text._id %>/sentiment/0" class="btn btn-outline-secondary btn-sent btn-unsure mx-1 btn-sm">Not Sure</a>
+</div> -->
             
         <% } %>
 	</div>

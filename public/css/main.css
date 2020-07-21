@@ -20,7 +20,7 @@ body, html {
 }
 
 
-.btn-vnegative, .btn-negative, .btn-neutral, .btn-positive, .btn-vpositive {
+.btn-vnegative, .btn-negative, .btn-neutral, .btn-positive, .btn-vpositive, .btn-unsure {
     color: #333333;
     width:90px;
     /* max-width: 90px; */
