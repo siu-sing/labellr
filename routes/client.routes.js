@@ -13,6 +13,8 @@ const {
     runInNewContext
 } = require("vm");
 
+
+
 //------ JOB CRUD
 //Create Route
 router.get('/create', (req, res) => {
@@ -301,5 +303,54 @@ router.post('/upload/text_csv', upload.single('file'), (req, res) => {
             res.redirect(`/client/view/${req.body.job}`);
         })
 });
+
+//------DOWNLOAD JOB RESULTS
+// const ws = fs.createWriteStream
+router.get('/download/:job_id', async (req, res) => {
+
+    try {
+        //Find all job text that match job id
+        //Build array that looks like below
+        let texts = await Text.aggregate([{
+            $match: {
+                jobRef: new mongoose.Types.ObjectId(req.params.job_id)
+            },
+        }, {
+            $project: {
+                // textContent: 1,
+                // sentLabel: 1,
+                _id: 0,
+                "text" : "$textContent",
+                "labels" : "$sentLabel",
+            }
+        }]);
+        
+        //Download CSV
+        //set file name, replace space with underscore
+        let data = texts;
+        let job = await Job.findById(req.params.job_id, "jobName");
+        let fileName = job.jobName.trim().replace(/ /g, "_");
+        let filePath = `public/reports/${fileName}.csv`;
+
+        //Write to stream
+        const ws = fs.createWriteStream(filePath);
+        csv.write(data, {
+                headers: true
+            })
+            .pipe(ws) //write to path
+            .on("finish", function () { //when finish writing, download to client
+                res.download(filePath, async (err) => {
+                    try {
+                        fs.unlinkSync(filePath); //delete file after fownload ends
+                    } catch (error) {
+                        console.log(error);
+                    }
+                });
+            });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 module.exports = router;
