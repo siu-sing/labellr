@@ -5,7 +5,9 @@ At the beginning of the project the basic framework had to be set up, and since 
 
 As I moved further along in my project, I had thoughts of features that should be developed specific to different aspects of the app. To organise these ideas without disrupting my flow of thought during the sprint, I recorded these ideas as user-stories in the backlog.
 
-At the end of each sprint, I looked over the backlog and select 3 -4 items that I thought would be achievable within the sprint, and also kept in mind to have a good mix of FE/BE features each sprint.
+At the end of each sprint, I looked over the backlog and select 3 to 4 items that I thought would be achievable within the sprint, and also kept in mind to have a good mix of FE/BE features each sprint.
+
+*** - Indicates a feature that was / (I expect to be) challenging to implement.
 
 
 #### Sprint 1 - Initial planning
@@ -71,12 +73,17 @@ At the end of each sprint, I looked over the backlog and select 3 -4 items that 
     - As a labeller, I would like a help page to undrstand how to start labelling, manage my jobs etc
 - Version 2 - Image Labelling
     - ***Refactor/Update routes/displays to handle image labelling
+        - Image Model
+        - Update forms
+        - Update job cards (new cards? or refactor existing cards?)
+        - Update display page
+        - Update routes to handle display (new routes or refactor existing text routes?)
 
 #### Post Mortem/Thoughts during development
 - is there a better way to organise views/buttons of the same card but for different users?
 - forgot to delete text when deleting jobs, must plan deleting logic when building references between models
-- tried to left join using mongo DB, switched to handling the exclusions by writing my own logic in js, - should we always strive to write our query logic in mongoDB queries?
-- its hard to visualise the complete app before actually building parts of it, is this a solo developer thing? or should we always strive to wireframe the whole app before building? or wireframe during each sprint - i generally did this
+- tried to left join using mongo DB, switched to handling the exclusions by writing my own logic in js, how to decide to write mongoDB queries or handle them in pure js? Is it a question of efficiency?
+- its hard to visualise the complete app before actually building parts of it, is this a solo developer thing? or should we always strive to wireframe/user-story the whole app before building? or wireframe during each sprint - i generally did this
 - should probably randomise the texts instead of getting one labeller to label all. i.e. pull from texts that have been labelled less than X times.
 - for each workflow, should have a smarter strategy in selecting which text to label - select only data that has not hit the X number of labels.
-- there were alot of convenient features that was in the backlog, but for this project i prioiritized functional features instead to ensure that core functionalities are delivered, sacrificing minor UX
+- there were alot of convenient features that was in the backlog, but for this project (due to tight timelines) i prioiritized functional features instead to ensure that core functionalities are delivered but sacrificing abit of the UX
