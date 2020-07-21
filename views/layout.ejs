@@ -27,9 +27,12 @@
 			<ul class="navbar-nav mr-auto">
 				<!-- All Users -->
 				<% if(currentUser){%>
+
+				<% if(currentUser.userType==1){%>
 				<li class="nav-item">
 					<a class="nav-link" href="/<%= currentUser.userType==1 ? "labeller" : "client" %>/account">Account</a>
 				</li>
+				<% } %>
 
 				<!-- User is client -->
 				<% if(currentUser.userType==2){%>
