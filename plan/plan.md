@@ -71,6 +71,8 @@ At the end of each sprint, I looked over the backlog and select 3 to 4 items tha
 - Content
     - As a Client, I would like a Help page to understand how to set up workflows, and various rules/instructions to take note of
     - As a labeller, I would like a help page to undrstand how to start labelling, manage my jobs etc
+- Version 1.1 - Topic labelling
+    - Handle client predefined topics
 - Version 2 - Image Labelling
     - ***Refactor/Update routes/displays to handle image labelling
         - Image Model
