@@ -30,13 +30,15 @@ Clients here refer to data scientists who needs some training data labelled.
 | -------------|-------------|-----|
 | Admin<br>Labeller<br>Client | textContent, length<br>labelled language<br>labelled sentiment<br>labelled topic | imageUrl<br>type of label<br>result of label |
 
+<img src="plan/erd.png" width="400">
+
 ### MVP:
 - CRUD for Text Model
 - Login for Admin, Labeller and Client
 - Routes for Labeller and Client
 - Allow Admin to view all routes 
 - Allow a labeller to label a piece of text with 
-    - sentiment (1 for negative, 5 for positive, 3 for neutral, "not sure" for not sure)
+    - sentiment (1 for negative, 5 for positive, 3 for neutral
 
 ### Furthers:
 - Allow labelling text with topic (e.g. pricing issue, operational issue, customer service issue)
