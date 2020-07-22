@@ -57,18 +57,22 @@ At the end of each sprint, I looked over the backlog and select 3 to 4 items tha
 1. *** As a client, I want to be able to download all sentiment labels of my data via CSV to do further analysis. Reshape text data and labels into CSV
 2. Create test cases to run everytime I do a major upgrade or change - in preparation for next version
 
+#### Sprint 8 - Clean deletes, Front end tidy up
+1. Clean deletes - if job is deleted, all text and references to the job and text needs to deleted as well
+3. As a labeller on my dashboard, I would like to sort by jobs in progress, completed, add color
+3. As a client on my dashboard, I would like to sort workflows by not started, in progress and closed
+4. Format status names to show `Not Started` instead of `notStarted`
+5. Progress bar for labelling instead of fraction
+
+
 #### Backlogs
 - Front end/UI/UX
     - Use moment to format dates
-    - Format status names to show `Not Started` instead of `notStarted`
-    - Progress bar for labelling instead of fraction
-    - As a labeller on my dashboard, I would like to sort/filter by jobs in progress, completed, add color
-    - As a client on my dashboard, I would like to sort/filter workflows by not started, in progress and closed
+    - As a labeller on my dashboard, I would like to filter by jobs in progress, completed, add color
+    - As a client on my dashboard, I would like to filter workflows by not started, in progress and closed
     - As an admin on my dashboard, I would like to view user stats based on user type
     - Add styling on cards to visually identify type of workflow being created
     - Add a footer for about us, labeller/client help, contact
-- Backend logic
-    - Clean deletes - if job is deleted, all text and references to the job and text needs to deleted as well
 - Content
     - As a Client, I would like a Help page to understand how to set up workflows, and various rules/instructions to take note of
     - As a labeller, I would like a help page to undrstand how to start labelling, manage my jobs etc
