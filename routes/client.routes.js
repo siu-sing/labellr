@@ -339,8 +339,8 @@ router.get('/download/:job_id', async (req, res) => {
             })
             .pipe(ws) //write to path
             .on("finish", function () { //when finish writing, download to client
-                // res.download(filePath, async (err) => {
-                res.download('public/img/labellrlogo.png', async (err) => {
+                res.download(filePath, async (err) => {
+                // res.download('public/img/labellrlogo.png', async (err) => {
                     try {
                         // fs.unlinkSync(filePath); //delete file after fownload ends
                     } catch (error) {
