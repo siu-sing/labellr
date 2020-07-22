@@ -5,8 +5,8 @@
 	<div class="card-body">
 		<h6 class="card-title"></h6>
         <div>
-            <strong>Total Labellers:</strong> <%= labellerStats.complete ?? 0 + labellerStats.inProgress ?? 0 %> |
-            <span class="font-italic text-muted"><%= labellerStats.inProgress ?? 0 %> in progress, <%= labellerStats.complete ?? 0 %> complete.</span>
+            <strong>Total Labellers:</strong> <%= labellerStats.complete ? labellerStats.complete : 0 + labellerStats.inProgress ? labellerStats.inProgress : 0 %> |
+            <span class="font-italic text-muted"><%= labellerStats.inProgress ? labellerStats.inProgress : 0 %> in progress, <%= labellerStats.complete ?? 0 %> complete.</span>
         </div>
 		<div><strong>Progress:</strong> <%= dataStats.numLabelledData %> of <%=job.texts.length %> data points have at least <%= job.numLabels %> labels.</div>
         <div><strong>Total useful data points:</strong> <%= dataStats.numUsefulData %> </div>
