@@ -64,6 +64,7 @@ At the end of each sprint, I looked over the backlog and select 3 to 4 items tha
 4. Format status names to show `Not Started` instead of `notStarted`
 5. Progress bar for labelling instead of fraction
 
+#### Sprint 9 - Version 1.1
 
 #### Backlogs
 - Front end/UI/UX
