@@ -110,9 +110,3 @@ router.delete("/delete/:job_id", async (req, res) => {
 });
 
 module.exports = router;
-
-//To replicate error
-//Client Create workflow
-//Labeller take on job and start labelling
-//Admin logs on and delete the workflow
-//Labeller logs on and tries to view dashboard
