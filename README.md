@@ -32,6 +32,30 @@ Clients here refer to data scientists who needs some training data labelled.
 
 <img src="plan/erd.png" width="400">
 
+#### Job States
+1. Not Started 
+    - Job is initialized with this state
+    - At this state, the Job is not visible to labellers
+    - Client can make edits and also upload text to the job
+2. In Progress
+    - Job goes into this state when client clicks publish
+    - Client no longer can upload text, but can still make edits to the job name/configs
+    - Job is now visible to laballers and labellers can start labelling
+    - Client can download labelling results at any time in this state
+3. Closed
+    - Job goes into this state when client clicks "Close Workflow"
+    - Labeller can no longer label, but will see the job as closed
+    - Job cannot be re-opened
+    - Client can download labelling results at any time
+
+### Labeller-Job states
+This state represents the progress of the Labeller for the specified job
+1. In Progress
+    - Labeller has started labelling
+2. Complete
+    - Labeller has completed labelling all data points 
+    - Labeller can no longer view the data
+
 ### MVP:
 - CRUD for Text Model
 - Login for Admin, Labeller and Client

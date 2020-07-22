@@ -66,6 +66,7 @@ At the end of each sprint, I looked over the backlog and select 3 to 4 items tha
     - As a client on my dashboard, I would like to sort/filter workflows by not started, in progress and closed
     - As an admin on my dashboard, I would like to view user stats based on user type
     - Add styling on cards to visually identify type of workflow being created
+    - Add a footer for about us, labeller/client help, contact
 - Backend logic
     - Clean deletes - if job is deleted, all text and references to the job and text needs to deleted as well
 - Content
