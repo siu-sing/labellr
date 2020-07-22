@@ -52,3 +52,8 @@ body, html {
 .larger-badge{
     font-size: 1em;
 }
+
+.lead-leading-text {
+    font-size: 1.6em;
+    font-family:'Raleway', sans-serif;
+}
