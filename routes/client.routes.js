@@ -341,7 +341,7 @@ router.get('/download/:job_id', async (req, res) => {
             .on("finish", function () { //when finish writing, download to client
                 res.download(filePath, async (err) => {
                     try {
-                        fs.unlinkSync(filePath); //delete file after fownload ends
+                        // fs.unlinkSync(filePath); //delete file after fownload ends
                     } catch (err) {
                         console.log(error);
                     }
