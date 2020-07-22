@@ -43,8 +43,9 @@ router.get("/dashboard", async (req, res) => {
     try {
         let findRes = await Job.find({
             "owner": req.user._id
-        }).populate("owner");
-        // console.log(findRes);
+        }).populate("owner")
+        .sort({status: -1});
+        console.log(findRes[0]);
         res.render("client/dashboard", {
             jobs: findRes
         })

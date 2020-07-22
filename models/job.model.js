@@ -38,7 +38,7 @@ var jobSchema = new mongoose.Schema({
 
 jobSchema.virtual('statusName').get(function() {
     let statusname="";
-    switch (this.userType) {
+    switch (this.status) {
         case "notStarted":
             statusname = "Not Published"
             break;
@@ -47,6 +47,22 @@ jobSchema.virtual('statusName').get(function() {
             break;
         case "closed":
             statusname = "Closed"
+            break;
+    }
+    return statusname;
+});
+
+jobSchema.virtual('statusColor').get(function() {
+    let statusname="";
+    switch (this.status) {
+        case "notStarted":
+            statusname = "warning"
+            break;
+        case "inProgress":
+            statusname = "success"
+            break;
+        case "closed":
+            statusname = "secondary"
             break;
     }
     return statusname;

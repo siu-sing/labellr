@@ -96,12 +96,25 @@ let isInArray = function (_id, A) {
     return isInArray;
 }
 
+function jobStatusCompare(labelJobA, labelJobB){
+    if(labelJobA.jobStatus<labelJobB.jobStatus){
+        return 1;
+    } else if (labelJobA.jobStatus>labelJobB.jobStatus){
+        return -1;
+    } else {
+        return 0;
+    }
+}
+
 //Display Dashbord - Jobs that labeller currently working on 
 router.get("/dashboard", async (req, res) => {
     //Find all jobs under user
     try {
         let user = await User.findById(req.user._id).populate('labelJobs.job')
-        console.log(user.labelJobs);
+
+        user.labelJobs.sort(jobStatusCompare);
+
+        console.log(user);
         res.render("labeller/dashboard", {
             user: user
         })
