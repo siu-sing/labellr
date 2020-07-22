@@ -12,7 +12,7 @@ require("dotenv").config();
 
 //Connect to MongoDB
 mongoose.connect(
-    process.env.MONGODB, {
+    process.env.MONGODBLIVE, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false, //solves deprecation warning
