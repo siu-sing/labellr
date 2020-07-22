@@ -37,3 +37,15 @@ Appendix
 - Usage of cards for reuseability
 - Calculating stats
 - Model states
+
+
+### Demo Flow
+1. Login as Admin and show types of users
+2. Concept of a workflow
+3. Login as client 2 and create new grab workflow
+4. Upload grab text, and view workflow details and publish
+5. Sign up as labeller, show new workflows, and dashbaord
+6. Login as labeller 2, and continue labelling
+7. Start labelling and stop halfway
+8. Login as labeller 3, and label rubbish
+9. Go back to client and show details, download CSV
