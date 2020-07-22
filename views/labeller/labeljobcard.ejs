@@ -9,15 +9,17 @@
 	</div>
 	<div class="card-body">
 		<h6 class="card-title"><strong>Title:</strong> <%= labelJob.job.jobName %></h6>
-        <div><strong>Label Status:</strong> <span class="badge-pill larger-badge badge-<%= labelJob.jobStatus == "inProgress" ? "warning" : "secondary" %>"><%= labelJob.jobStatus=="inProgress" ? "In Progress" : "Complete" %></span> </div>
-        <div><strong>You labelled:</strong> <%= labelJob.lastLabelled %> labels </div>
-        <div><strong>Total data points:</strong> <%= labelJob.job[`${labelJob.job.dataType}s`].length %> </div>
-        <% if(labelJob.jobStatus=="complete") { %>
-            <a href="/labeller/label/<%= labelJob.job._id %>" 
-                class="btn btn-secondary mx-1 float-right btn-sm disabled" disabled>Completed</a>
-        <% } else { %>
-            <a href="/labeller/label/<%= labelJob.job._id %>" 
-                class="btn btn-success mx-1 float-right btn-sm">Continue Labelling</a>
-        <% } %>
+		<div><strong>Label Status:</strong> <span
+				class="badge-pill larger-badge badge-<%= labelJob.jobStatus == "inProgress" ? "warning" : "secondary" %>"><%= labelJob.jobStatus=="inProgress" ? "In Progress" : "Complete" %></span>
+		</div>
+		<div><strong>You labelled:</strong> <%= labelJob.lastLabelled %> labels </div>
+		<div><strong>Total data points:</strong> <%= labelJob.job[`${labelJob.job.dataType}s`].length %> </div>
+		<% if(labelJob.jobStatus=="complete") { %>
+		<a href="/labeller/label/<%= labelJob.job._id %>" class="btn btn-secondary mx-1 float-right btn-sm disabled"
+			disabled>Completed</a>
+		<% } else { %>
+		<a href="/labeller/label/<%= labelJob.job._id %>" class="btn btn-success mx-1 float-right btn-sm">Continue
+			Labelling</a>
+		<% } %>
 	</div>
 </div>

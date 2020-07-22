@@ -73,6 +73,7 @@ At the end of each sprint, I looked over the backlog and select 3 to 4 items tha
     - As an admin on my dashboard, I would like to view user stats based on user type
     - Add styling on cards to visually identify type of workflow being created
     - Add a footer for about us, labeller/client help, contact
+    - As a labeller, I want the labelling screen to be compatible on smaller screens.
 - Content
     - As a Client, I would like a Help page to understand how to set up workflows, and various rules/instructions to take note of
     - As a labeller, I would like a help page to undrstand how to start labelling, manage my jobs etc
