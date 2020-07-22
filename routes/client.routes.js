@@ -320,11 +320,11 @@ router.get('/download/:job_id', async (req, res) => {
                 // textContent: 1,
                 // sentLabel: 1,
                 _id: 0,
-                "text" : "$textContent",
-                "labels" : "$sentLabel",
+                "text": "$textContent",
+                "labels": "$sentLabel",
             }
         }]);
-        
+
         //Download CSV
         //set file name, replace space with underscore
         let data = texts;
@@ -337,16 +337,17 @@ router.get('/download/:job_id', async (req, res) => {
         csv.write(data, {
                 headers: true
             })
-            .pipe(res) //write to path
-            // .on("finish", function () { //when finish writing, download to client
-            //     res.download(filePath, async (err) => {
-            //         try {
-            //             // fs.unlinkSync(filePath); //delete file after fownload ends
-            //         } catch (err) {
-            //             console.log(error);
-            //         }
-            //     });
-            // });
+            .pipe(ws) //write to path
+            .on("finish", function () { //when finish writing, download to client
+                // res.download(filePath, async (err) => {
+                res.download('public/img/labellrlogo.png', async (err) => {
+                    try {
+                        // fs.unlinkSync(filePath); //delete file after fownload ends
+                    } catch (error) {
+                        console.log(error);
+                    }
+                });
+            });
     } catch (error) {
         console.log(error);
     }
