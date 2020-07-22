@@ -342,7 +342,7 @@ router.get('/download/:job_id', async (req, res) => {
                 res.download(filePath, async (err) => {
                     try {
                         fs.unlinkSync(filePath); //delete file after fownload ends
-                    } catch (error) {
+                    } catch (err) {
                         console.log(error);
                     }
                 });
