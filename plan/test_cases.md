@@ -15,3 +15,25 @@
 - check client dashboard
 - check labeller account page
 - check admin dashboard
+
+#### Demo Flow
+1. Sign up Client and sign in
+2. Create Job
+3. Upload grab reviews
+4. Publish job
+5. Sign out
+
+
+1. Sign up user and sign in
+2. Look at available work flows, select a job, label
+3. Sign out and sign in with another and label the new job
+4. Sign out
+
+1. Sign back in with original client to view results
+2. Download results
+
+Appendix
+- Admin Dashboard
+- Usage of cards for reuseability
+- Calculating stats
+- Model states
