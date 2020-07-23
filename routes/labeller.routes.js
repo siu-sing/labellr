@@ -96,7 +96,7 @@ let isInArray = function (_id, A) {
     return isInArray;
 }
 
-//For sorting
+//For sorting label jobs on dashboard
 function jobStatusCompare(labelJobA, labelJobB) {
     if (labelJobA.jobStatus < labelJobB.jobStatus) {
         return 1;
@@ -193,7 +193,7 @@ router.get("/label/:id", async (req, res) => {
             if (findRes.labelType == 'sentiment') {
 
                 //Render only those texts
-                res.render("labeller/sent_label", {
+                res.render("labeller/label", {
                     job: findRes,
                     texts: textsDisplay,
                     textsLeft: textsLeft,
@@ -202,7 +202,7 @@ router.get("/label/:id", async (req, res) => {
             //Show topic label card
             } else if (findRes.labelType == 'topic') {
 
-                res.render("labeller/topic_label",{
+                res.render("labeller/label",{
                     job: findRes,
                     texts: textsDisplay,
                     textsLeft: textsLeft,
@@ -249,5 +249,36 @@ router.get("/label/job/:job_id/text/:text_id/sentiment/:sent_score", async (req,
 
 });
 
+//When user submits a topic label
+router.get("/label/job/:job_id/text/:text_id/topic/:topic_label", async (req, res) => {
+    console.log(req.params.topic_label);
+
+    try {
+        let userId = req.user._id;
+
+        //Add topic label to text object
+        let topicRes = await Text.findByIdAndUpdate(req.params.text_id, {
+            $push: {
+                topicLabel: req.params.topic_label,
+            }
+        })
+
+        //Increment lastlabelled by one
+        let lastLabRes = await User.findOneAndUpdate({
+            _id: userId,
+            "labelJobs.job": req.params.job_id
+        },{
+            //increament last labelled by 1
+            $inc: {
+                "labelJobs.$.lastLabelled" : 1,
+            }
+        })
+
+        res.redirect(`/labeller/label/${req.params.job_id}`)
+
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 module.exports = router;

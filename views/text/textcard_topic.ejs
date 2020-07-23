@@ -1,0 +1,19 @@
+<div class="card my-2 w-75 mx-auto">
+	<div class="card-body">
+		<div class="font-italic text-center">
+			<%= text.textContent %>
+		</div>
+		<div class="my-2 text-center">
+			<% labels.forEach( label => { %>
+			<a href="/labeller/label/job/<%= job._id %>/text/<%= text._id %>/topic/<%=label%>"
+				class="btn btn-outline-dark mx-1 btn-sm my-2"><%= label %></a>
+            <% }); %>
+            <br>
+			<a href="/labeller/label/job/<%= job._id %>/text/<%= text._id %>/topic/not_sure"
+				class="btn btn-outline-primary mx-1 btn-sm">not sure</a>
+			<a href="/labeller/label/job/<%= job._id %>/text/<%= text._id %>/topic/not_applicable"
+				class="btn btn-outline-primary mx-1 btn-sm">not applicable</a>
+		</div>
+
+	</div>
+</div>
