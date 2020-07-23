@@ -56,7 +56,12 @@ This state represents the progress of the Labeller for the specified job
     - Labeller has completed labelling all data points 
     - Labeller can no longer view the data
 
-### MVP:
+
+[User Stories](https://github.com/siu-sing/labellr/blob/master/plan/plan.md)
+
+[Wire Frames](https://github.com/siu-sing/labellr/tree/master/plan)
+
+### MVP at Start of project:
 - CRUD for Text Model
 - Login for Admin, Labeller and Client
 - Routes for Labeller and Client
@@ -64,20 +69,29 @@ This state represents the progress of the Labeller for the specified job
 - Allow a labeller to label a piece of text with 
     - sentiment (1 for negative, 5 for positive, 3 for neutral
 
+### Features at the end of project
+- Clients
+    - Set up and publish workflows for both Sentiment and Topic labelling
+    - Build draft workflows and publish only when they are ready
+    - Upload a text based csv file of data for labelling.
+    - For Topic labelling, Clients can furnish a set of topics for Labellers to tag.
+    - View summary stats on the workflow details page, and download a CSV of both topic and sentiment labelling results.
+    - For Sentiment labelling, summary stats include a a count of the number of useful labels for each piece of data. Clients can decide to close the workflow if they have sufficient labels.
+- Labellers 
+    - Can take on multiple workflows at the same time. Progress of each labelling workflow will be saved in real time.
+
+
 ### Furthers:
-- Allow labelling text with topic (e.g. pricing issue, operational issue, customer service issue)
-- Allow image labelling
-- Allow Clients to set up configs for their labelling - language, topics, image (e.g. is this a cat?)
-- Allow labellers to select language preference or specialties
-- Scoring for labellers - for compensation/gamification
+- As a client, I would like to upload/link images for labellers to tag. And set up specific configurations for the tagging. Eg. (Is this a cat or dog?)
+- As a client, I want to be able to select the demographic of my labellers (i.e. labellers aged 20-25, residing in singapore), so that my labels would be more contextual and accurate
+- As a labeller, I want to be compensated in some way for my efforts, preferably compensation.
+- As a client I would want to be able to connect to my data source (perhaps a DB of some kind), to regularly/automatically upload data for labelling.
+- As a labeller, I would like to be able to access the labelling page in a more user friendly manner, perhaps a via chat bot.
+- As a client, I would want to see more statistics about my workflow, maybe a visualization of the results.
+- [rest of the backlog](https://github.com/siu-sing/labellr/blob/master/plan/plan.md)
 
-### Further furthers:
-- Bulk upload of text by csv or from DBs, google sheets
-- Use twitter or reddit API to get sample texts
-- Download of results by csv
-- Convert to chat bot for labelling on the go
-- Analytics for labels, stats for the labels etc
- 
- https://www.techighness.com/post/node-expressjs-endpoint-to-upload-and-process-csv-file/
-
- https://github.com/C2FO/fast-csv/tree/master/examples/parsing-js
+### Credits and Acknowledgements
+- Friends and classmates who gave feedback after testing my app.
+- Ebere and TAs, for their guidance along the way.
+- [Logo maker](https://hatchful.shopify.com/) - free and fast logo generator
+- [SVG Background](https://www.svgbackgrounds.com/https://www.techighness.com/post/node-expressjs-endpoint-to-upload-and-process-csv-file/) - pure CSS backgrounds, code only
