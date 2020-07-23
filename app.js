@@ -10,16 +10,19 @@ const methodOverride = require("method-override");
 const checkUser = require('./config/checkUser');
 require("dotenv").config();
 
+//dev or test env
+let mongoUrl = process.argv[2]=="dev" ? process.env.MONGODB : process.env.MONGODBLIVE;
+console.log(`${process.argv[2]}`)
 //Connect to MongoDB
 mongoose.connect(
-    process.env.MONGODBLIVE, {
+    mongoUrl, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false, //solves deprecation warning
         useCreateIndex: true,
     },
     () => {
-        console.log("Mongodb connected");
+        console.log(`Mongodb connected ${mongoUrl}`);
     }
 );
 
