@@ -8,14 +8,19 @@
             <strong>Total Labellers:</strong> <%= labellerStats.complete ? labellerStats.complete : 0 + labellerStats.inProgress ? labellerStats.inProgress : 0 %> |
             <span class="font-italic text-muted"><%= labellerStats.inProgress ? labellerStats.inProgress : 0 %> in progress, <%= labellerStats.complete ? labellerStats.complete : 0 %> complete.</span>
         </div>
-		<div><strong>Progress:</strong> <%= dataStats.numLabelledData %> of <%=job.texts.length %> data points have at least <%= job.numLabels %> labels.</div>
-        <div><strong>Total useful data points:</strong> <%= dataStats.numUsefulData %> </div>
-        <small class="text-muted font-italic"><%= dataStats.numUsefulData %> data points have decisive labels i.e. more than half of the labels for these data points have the same sentiment.</small>
+        <div><strong>Progress:</strong> <%= dataStats.numLabelledData %> of <%=job.texts.length %> data points have at least <%= job.numLabels %> labels.</div>
+        
+
+        <% if(job.labelType=="sentiment") { %>
+            <div><strong>Total useful data points:</strong> <%= dataStats.numUsefulData %> </div>
+            <small class="text-muted font-italic"><%= dataStats.numUsefulData %> data points have decisive labels i.e. more than half of the labels for these data points have the same sentiment.</small>
+        <% } %>        
+        
         <!-- CLIENT or ADMIN  -->
         <div>
             <% if(currentUser.userType!==1){ %>
                 <a href="/client/download/<%= job._id %>" target="_blank" 
-                    class="btn btn-secondary mx-1 float-right btn-sm">Download Results</a>
+                    class="btn btn-secondary mx-1 my-2 float-right btn-sm">Download Results</a>
             <% } %>
         </div>
 	</div>

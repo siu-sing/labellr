@@ -321,27 +321,46 @@ router.post('/upload/text_csv', upload.single('file'), (req, res) => {
 // const ws = fs.createWriteStream
 router.get('/download/:job_id', async (req, res) => {
 
+    let job = await Job.findById(req.params.job_id);
+
     try {
         //Find all job text that match job id
         //Build array that looks like below
-        let texts = await Text.aggregate([{
-            $match: {
-                jobRef: new mongoose.Types.ObjectId(req.params.job_id)
-            },
-        }, {
-            $project: {
-                // textContent: 1,
-                // sentLabel: 1,
-                _id: 0,
-                "text": "$textContent",
-                "labels": "$sentLabel",
-            }
-        }]);
-
+        let texts = [];
+        if(job.labelType=="sentiment"){
+            texts = await Text.aggregate([{
+                $match: {
+                    jobRef: new mongoose.Types.ObjectId(req.params.job_id)
+                },
+            }, {
+                $project: {
+                    // textContent: 1,
+                    // sentLabel: 1,
+                    _id: 0,
+                    "text": "$textContent",
+                    "labels": "$sentLabel",
+                }
+            }]);
+        } else if (job.labelType=="topic"){
+            texts = await Text.aggregate([{
+                $match: {
+                    jobRef: new mongoose.Types.ObjectId(req.params.job_id)
+                },
+            }, {
+                $project: {
+                    // textContent: 1,
+                    // sentLabel: 1,
+                    _id: 0,
+                    "text": "$textContent",
+                    "labels": "$topicLabel",
+                }
+            }]);
+        }
+    
         //Download CSV
         //set file name, replace space with underscore
         let data = texts;
-        let job = await Job.findById(req.params.job_id, "jobName");
+       
         let fileName = job.jobName.trim().replace(/ /g, "_");
         let filePath = `public/reports/${fileName}.csv`;
 
