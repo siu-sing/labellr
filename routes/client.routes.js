@@ -26,6 +26,8 @@ router.post('/create', async (req, res) => {
     let jobDetails = req.body;
     jobDetails["owner"] = req.user._id;
 
+    console.log(jobDetails);
+
     try {
         let job = Job(jobDetails);
         let saveRes = await job.save();

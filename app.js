@@ -12,7 +12,7 @@ require("dotenv").config();
 
 //dev or test env
 let mongoUrl = process.argv[2]=="dev" ? process.env.MONGODB : process.env.MONGODBLIVE;
-console.log(`${process.argv[2]}`)
+// console.log(`${process.argv[2]}`)
 //Connect to MongoDB
 mongoose.connect(
     mongoUrl, {

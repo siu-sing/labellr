@@ -15,7 +15,7 @@
 					<label class="form-check-label" for="inlineRadio1">Text</label>
 				</div>
 				<div class="form-group form-check form-check-inline">
-					<input class="form-check-input" type="radio" name="dataType" id="inlineRadio2" value="image">
+					<input class="form-check-input" type="radio" name="dataType" id="inlineRadio2" value="image" disabled>
 					<label class="form-check-label" for="inlineRadio2">Images</label>
 				</div>
 
@@ -33,21 +33,50 @@
 
                 <div class="form-group">What type of labels would you need?</div>
 				<div class="form-group">
-					<div class="form-check d-none">
-						<input class="form-check-input" type="checkbox" id="language" name="labelType[]" value="language">
-						<label class="form-check-label" for="language"> Language </label>
-					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="checkbox" id="sentiment" name="labelType[]" value="sentiment">
+						<input class="form-check-input" type="radio" id="sentiment" name="labelType" value="sentiment" checked onclick="showTopicInput()"> 
 						<label class="form-check-label" for="sentiment" > Sentiment </label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="checkbox" id="topic" name="labelType[]" value="topic" disabled>
+						<input class="form-check-input" type="radio" id="topic" name="labelType" value="topic" onclick="showTopicInput()">
                         <label class="form-check-label" for="topic"> Topic </label>
-                        <small id="topic" class="form-text text-muted font-italic">Available in next release!</small>
 					</div>
-				</div>
+                </div>
+                <div class="form-group col-md-6" style="display:none" id="topic-input">
+                    <div class="my-1">Topic labels</div>
+                    <small id="topic-input" class="form-text text-muted font-italic text-nowrap">Unsure or None will be included as default labels</small>
+                    <input name="textTopics[]" type="text" class="form-control my-1 form-control-sm" id="textTopic0">
+                    <div class="list__controls">
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="newTopicInput()">+</button>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="delTopicInput()">-</button>
+                    </div>
+                </div>
+                
+                <script>
+                    let showTopicInput = () => {
+                        let topicRadio = document.getElementById("topic");
+                        let topicInput = document.getElementById("topic-input");
+                        topicInput.style.display = topicRadio.checked ? "block" : "none";
+                    }
 
+                    let id = 1;
+                    let newTopicInput = () => {
+                        let p = document.getElementById("topic-input");
+                        let newInput = document.createElement("input");
+                        newInput.className = "form-control my-1 form-control-sm";
+                        newInput.id = `textTopic${id}`;
+                        newInput.name = "textTopics[]";
+                        p.insertBefore(newInput,p.lastElementChild);
+                        id++;
+                    }
+
+                    let delTopicInput = () => {
+                        if(id>1){
+                            document.getElementById(`textTopic${id-1}`).remove();
+                            id--;
+                        }
+                    }
+                </script>
 
 
 				<button type="submit" class="btn btn-outline-dark my-3" style="background-color:#99B0B4;">Create New

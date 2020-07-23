@@ -16,8 +16,8 @@ var jobSchema = new mongoose.Schema({
     },
     //Number of labels per data point requested by client
     numLabels: Number,
-    dataType: String,
-    labelType: [String],
+    dataType: String,   //text or image
+    labelType: String,    //sentiment or topic
     status: {
         type: String,
         default: "notStarted",
@@ -27,6 +27,8 @@ var jobSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Text",
     }],
+    textTopics: [String],
+    imageTopics: [String],
     images: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Images",

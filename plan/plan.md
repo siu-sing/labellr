@@ -65,6 +65,14 @@ At the end of each sprint, I looked over the backlog and select 3 to 4 items tha
 5. Progress bar for labelling instead of fraction
 
 #### Sprint 9 - Version 1.1
+1. As a client, i want to create a topic labelling workflow, and include a list of topics that i want to be labelled. There should be a default, "not sure", "na" selection.
+    - a job can only be either topic or sentiment
+    - input that collects topics for my workflow
+    - client create routes must handle topic inputs
+    - on job cards, show that its topic labelling and show the topics
+2. As a labeller, I want to be able to do topic labelling for topic labelling workflows
+    - labeller job card display must show the same info (which it will since its the same job card)
+    - label page must display topics instead of sentiments
 
 #### Backlogs
 - Front end/UI/UX
