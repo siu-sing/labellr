@@ -5,6 +5,13 @@
         </div>
     </div>
     <div class="row">
+        <% if(jobs.length==0){ %>
+            <div class="col">
+                <div>You have no workflows. <a href="/client/create">Create a new workflow</a> now!</div>
+            </div>
+        <% } else { %>
+
+
         <% jobs.forEach(job => { %>
         <div class="col-md-6">
                 <div>
@@ -12,5 +19,6 @@
                 </div>
         </div>
         <% }) %>
+        <% } %>
     </div>
 </div>

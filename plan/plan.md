@@ -74,6 +74,12 @@ At the end of each sprint, I looked over the backlog and select 3 to 4 items tha
     - labeller job card display must show the same info (which it will since its the same job card)
     - label page must display topics instead of sentiments
 3. As a client, when viewing my summary stats, I will need to see topic labelling stats instead of sentiment labelling
+4. As a client, when downloading csv results, i want to see topic for topic, sentiment for sentiment
+
+#### Sprint 10 - Prep for presentation
+1. Reset atlas 
+2. Add content
+
 
 #### Backlogs
 - Front end/UI/UX

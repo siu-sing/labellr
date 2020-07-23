@@ -40,12 +40,14 @@ Appendix
 
 
 ### Demo Flow
-1. Login as Admin and show types of users
-2. Concept of a workflow
-3. Login as client 2 and create new grab workflow
-4. Upload grab text, and view workflow details and publish
-5. Sign up as labeller, show new workflows, and dashbaord
-6. Login as labeller 2, and continue labelling
-7. Start labelling and stop halfway
-8. Login as labeller 3, and label rubbish
-9. Go back to client and show details, download CSV
+1. Overview of model - User (Client, Labeller), Jobs, Text
+2. Create client1, create new sentiment workflow, not published
+3. Upload csv text, check upload success, hit publish, show empty stats
+4. Create john, view available workflows dashboard, start labelling, stop halfway
+5. Go back to dashboard, all workflows should show nothing, dashboard should show in progress
+6. Login as jane, complete labelling of grab sentiment
+7. Login as jack, complete labelling of grab sentiment
+8. Login as client1, view summary stats, close workflow, and download csv
+9. Create new workflow, topic labelling of grab reviews
+10. Login as john, label topics, complete, go back to dashboard
+11. End
