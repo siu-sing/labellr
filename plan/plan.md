@@ -73,6 +73,7 @@ At the end of each sprint, I looked over the backlog and select 3 to 4 items tha
 2. As a labeller, I want to be able to do topic labelling for topic labelling workflows
     - labeller job card display must show the same info (which it will since its the same job card)
     - label page must display topics instead of sentiments
+3. As a client, when viewing my summary stats, I will need to see topic labelling stats instead of sentiment labelling
 
 #### Backlogs
 - Front end/UI/UX
@@ -90,6 +91,7 @@ At the end of each sprint, I looked over the backlog and select 3 to 4 items tha
 - Back end
     - As a labeller, if the workflow is closed, i should not be able to continue labelling
     - App should be able to limit the number of labellers per job/text, currently there is no limit
+    - As admin, i should be able to view/edit/delete users on my dashboard. If deleting a client, ensure all jobs related to the client are also deleted.
 - Version 1.1 - Topic labelling
     - Handle client predefined topics
 - Version 2 - Image Labelling

@@ -132,16 +132,26 @@ router.get("/view/:id", async (req, res) => {
         //get length of sentLabel > job.numLabels
         let numLabelledData = 0;
         let numUsefulData = 0;
-        job.texts.forEach(text => {
-            if (text.sentLabel.length >= job.numLabels) {
-                numLabelledData++;
-            }
-            if (areLabelsDecisive(text.sentLabel)) {
-                numUsefulData++;
-            }
-        });
 
-        console.log(labellerStats);
+        if(job.labelType=="sentiment"){
+            job.texts.forEach(text => {
+                if (text.sentLabel.length >= job.numLabels) {
+                    numLabelledData++;
+                }
+                if (areLabelsDecisive(text.sentLabel)) {
+                    numUsefulData++;
+                }
+            });
+        } else if(job.labelType=="topic"){
+            job.texts.forEach(text => {
+                if (text.topicLabel.length >= job.numLabels) {
+                    numLabelledData++;
+                }
+                // if (areLabelsDecisive(text.sentLabel)) {
+                //     numUsefulData++;
+                // }
+            });
+        }
 
         res.render("client/view", {
             job: job,
