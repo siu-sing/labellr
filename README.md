@@ -3,6 +3,8 @@ Project 2
 
 ## Crowdsourced Data Labelling
 
+Hosted on [Heroku](http://labellr.herokuapp.com/)
+
 ### Motivation:
 One of the many bottlenecks faced by data scientists is obtaining sufficient and accurate labelled training data as input into their models. 
 
