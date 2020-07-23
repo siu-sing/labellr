@@ -12,7 +12,7 @@ var textSchema = new mongoose.Schema({
     },
     langLabel:[String],
     sentLabel:[Number],
-    
+    topicLabel:[String],
 });
 
 const Text = mongoose.model("Text", textSchema);

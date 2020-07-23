@@ -96,10 +96,11 @@ let isInArray = function (_id, A) {
     return isInArray;
 }
 
-function jobStatusCompare(labelJobA, labelJobB){
-    if(labelJobA.jobStatus<labelJobB.jobStatus){
+//For sorting
+function jobStatusCompare(labelJobA, labelJobB) {
+    if (labelJobA.jobStatus < labelJobB.jobStatus) {
         return 1;
-    } else if (labelJobA.jobStatus>labelJobB.jobStatus){
+    } else if (labelJobA.jobStatus > labelJobB.jobStatus) {
         return -1;
     } else {
         return 0;
@@ -115,6 +116,12 @@ router.get("/dashboard", async (req, res) => {
         user.labelJobs.sort(jobStatusCompare);
 
         console.log(user);
+
+        user.labelJobs.forEach(i => {
+            console.log(i);
+            console.log(i.job.labelType);
+        })
+        // res.send(user);
         res.render("labeller/dashboard", {
             user: user
         })
@@ -182,13 +189,26 @@ router.get("/label/:id", async (req, res) => {
 
         } else {
 
-            //Render only those texts
-            res.render("labeller/label", {
-                job: findRes,
-                texts: textsDisplay,
-                textsLeft: textsLeft,
-                lastLabelled: lastLabelled,
-            })
+            //Show sentiment label card
+            if (findRes.labelType == 'sentiment') {
+
+                //Render only those texts
+                res.render("labeller/sent_label", {
+                    job: findRes,
+                    texts: textsDisplay,
+                    textsLeft: textsLeft,
+                    lastLabelled: lastLabelled,
+                })
+            //Show topic label card
+            } else if (findRes.labelType == 'topic') {
+
+                res.render("labeller/topic_label",{
+                    job: findRes,
+                    texts: textsDisplay,
+                    textsLeft: textsLeft,
+                    lastLabelled: lastLabelled,
+                })
+            }
         }
 
     } catch (error) {

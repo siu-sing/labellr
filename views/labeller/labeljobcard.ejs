@@ -1,11 +1,6 @@
 <div class="card my-2">
 	<div class="card-header text-capitalize font-weight-bold">
-		<%= labelJob.job.dataType %> labelling workflow - <% labelJob.job.labelType.forEach((type,idx)=>{ %>
-		<% if(idx>0) { %>
-		<%= ", " %>
-		<% } %>
-		<%= type %>
-		<% })%>
+		<%= labelJob.job.labelType %> labelling workflow
 	</div>
 	<div class="card-body">
 		<h6 class="card-title"><strong>Title:</strong> <%= labelJob.job.jobName %></h6>

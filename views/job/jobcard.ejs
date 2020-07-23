@@ -1,15 +1,17 @@
 <div class="card my-2">
 	<div class="card-header text-capitalize font-weight-bold">
-		<%= job.dataType %> labelling workflow - <%= job.labelType%>
+		<%= job.labelType%> labelling workflow
 	</div>
 	<div class="card-body">
 		<h6 class="card-title"><strong>Title:</strong> <%= job.jobName %></h6>
         <div><strong>Status:</strong> <span class="larger-badge badge-pill badge-<%= job.statusColor %>"><%= job.statusName %></span> </div>
-        <div><strong>Labels:</strong>
-            <% job.textTopics.forEach( textTopic => { %>
-                <span class="badge badge-secondary"><%= textTopic %></span>
-            <% }) %>
-        </div>
+        <% if(job.labelType=="topic") { %>
+            <div><strong>Labels:</strong>
+                <% job.textTopics.forEach( textTopic => { %>
+                    <span class="badge badge-secondary"><%= textTopic %></span>
+                <% }) %>
+            </div>
+        <% } %>
         <div><strong>Created:</strong> <%= job.createdAt.toDateString() %> </div>
         <div><strong>Labels per data point:</strong> <%= job.numLabels %> </div>
         <div><strong>Due Date:</strong> <%= job.dueDate %> </div>
