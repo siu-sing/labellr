@@ -3,7 +3,7 @@ Project 2
 
 ## Crowdsourced Data Labelling
 
-<img src="plan/landing_page.png" width="500">
+<img src="plan/landing_page.png">
 
 Hosted on [Heroku](http://labellr.herokuapp.com/)
 
